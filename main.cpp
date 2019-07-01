@@ -153,36 +153,31 @@ int main()
                         if (event.mouseButton.button == Mouse::Left)
                         {
                             for(int i =0;i<entities.size();i++)
-                            if((mouse_world.x>=(entities[0]->x)-10)&&(mouse_world.x<=(entities[0]->x)+10))
+                            if(((mouse_world.x>=(entities[i]->x)-10)&&(mouse_world.x<=(entities[i]->x)+10))&&((mouse_world.y>=(entities[i]->y)-10)&&(mouse_world.y<=(entities[i]->y)+10)))
                             {
+                                sc++;
+                                playerScoreString <<*score ;
                                 std::cout << "YPA";break;
                             }
-
-
-                            std::cout << "mouse x: " << event.mouseButton.x << std::endl;
-                            std::cout << "mouse y: " << event.mouseButton.y << std::endl;
-                            sc++;
-                            playerScoreString <<*score ;
-
                         }
             }
 
-        Font font;//øðèôò
-        font.loadFromFile("ALGER.TTF");//ïåðåäàåì íàøåìó øðèôòó ôàéë øðèôòà
-        Text text("", font, 20);//ñîçäàåì îáúåêò òåêñò. çàêèäûâàåì â îáúåêò òåêñò ñòðîêó, øðèôò, ðàçìåð øðèôòà(â ïèêñåëÿõ);//ñàì îáúåêò òåêñò (íå ñòðîêà)
-        text.setColor(Color::Red);//ïîêðàñèëè òåêñò â êðàñíûé. åñëè óáðàòü ýòó ñòðîêó, òî ïî óìîë÷àíèþ îí áåëûé
-        text.setStyle(Text::Bold);//æèðíûé òåêñò.
+        Font font;//ÑˆÑ€Ð¸Ñ„Ñ‚
+        font.loadFromFile("ALGER.TTF");//Ð¿ÐµÑ€ÐµÐ´Ð°ÐµÐ¼ Ð½Ð°ÑˆÐµÐ¼Ñƒ ÑˆÑ€Ð¸Ñ„Ñ‚Ñƒ Ñ„Ð°Ð¹Ð» ÑˆÑ€Ð¸Ñ„Ñ‚Ð°
+        Text text("", font, 20);//ÑÐ¾Ð·Ð´Ð°ÐµÐ¼ Ð¾Ð±ÑŠÐµÐºÑ‚ Ñ‚ÐµÐºÑÑ‚. Ð·Ð°ÐºÐ¸Ð´Ñ‹Ð²Ð°ÐµÐ¼ Ð² Ð¾Ð±ÑŠÐµÐºÑ‚ Ñ‚ÐµÐºÑÑ‚ ÑÑ‚Ñ€Ð¾ÐºÑƒ, ÑˆÑ€Ð¸Ñ„Ñ‚, Ñ€Ð°Ð·Ð¼ÐµÑ€ ÑˆÑ€Ð¸Ñ„Ñ‚Ð°(Ð² Ð¿Ð¸ÐºÑÐµÐ»ÑÑ…);//ÑÐ°Ð¼ Ð¾Ð±ÑŠÐµÐºÑ‚ Ñ‚ÐµÐºÑÑ‚ (Ð½Ðµ ÑÑ‚Ñ€Ð¾ÐºÐ°)
+        text.setColor(Color::Red);//Ð¿Ð¾ÐºÑ€Ð°ÑÐ¸Ð»Ð¸ Ñ‚ÐµÐºÑÑ‚ Ð² ÐºÑ€Ð°ÑÐ½Ñ‹Ð¹. ÐµÑÐ»Ð¸ ÑƒÐ±Ñ€Ð°Ñ‚ÑŒ ÑÑ‚Ñƒ ÑÑ‚Ñ€Ð¾ÐºÑƒ, Ñ‚Ð¾ Ð¿Ð¾ ÑƒÐ¼Ð¾Ð»Ñ‡Ð°Ð½Ð¸ÑŽ Ð¾Ð½ Ð±ÐµÐ»Ñ‹Ð¹
+        text.setStyle(Text::Bold);//Ð¶Ð¸Ñ€Ð½Ñ‹Ð¹ Ñ‚ÐµÐºÑÑ‚.
        //////draw//////
        app.draw(background);
-            // îáúÿâèëè ïåðåìåííóþ
+            // Ð¾Ð±ÑŠÑÐ²Ð¸Ð»Ð¸ Ð¿ÐµÑ€ÐµÐ¼ÐµÐ½Ð½ÑƒÑŽ
         for(auto i:entities)
         {
-        text.setString("SCORE:");//çàäàåì ñòðîêó òåêñòó è âûçûâàåì ñôîðìèðîâàííóþ âûøå ñòðîêó ìåòîäîì .str()
-        text.setPosition(100,200);//çàäàåì ïîçèöèþ òåêñòà, îòñòóïàÿ îò öåíòðà êàìåðû
-        app.draw(text);//ðèñóþ ýòîò òåêñò
+        text.setString("SCORE:");//Ð·Ð°Ð´Ð°ÐµÐ¼ ÑÑ‚Ñ€Ð¾ÐºÑƒ Ñ‚ÐµÐºÑÑ‚Ñƒ Ð¸ Ð²Ñ‹Ð·Ñ‹Ð²Ð°ÐµÐ¼ ÑÑ„Ð¾Ñ€Ð¼Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð½ÑƒÑŽ Ð²Ñ‹ÑˆÐµ ÑÑ‚Ñ€Ð¾ÐºÑƒ Ð¼ÐµÑ‚Ð¾Ð´Ð¾Ð¼ .str()
+        text.setPosition(100,200);//Ð·Ð°Ð´Ð°ÐµÐ¼ Ð¿Ð¾Ð·Ð¸Ñ†Ð¸ÑŽ Ñ‚ÐµÐºÑÑ‚Ð°, Ð¾Ñ‚ÑÑ‚ÑƒÐ¿Ð°Ñ Ð¾Ñ‚ Ñ†ÐµÐ½Ñ‚Ñ€Ð° ÐºÐ°Ð¼ÐµÑ€Ñ‹
+        app.draw(text);//Ñ€Ð¸ÑÑƒÑŽ ÑÑ‚Ð¾Ñ‚ Ñ‚ÐµÐºÑÑ‚
         text.setString(playerScoreString.str());
-        text.setPosition(180,200);//çàäàåì ïîçèöèþ òåêñòà, îòñòóïàÿ îò öåíòðà êàìåðû
-        app.draw(text);//ðèñóþ ýòîò òåêñò
+        text.setPosition(180,200);//Ð·Ð°Ð´Ð°ÐµÐ¼ Ð¿Ð¾Ð·Ð¸Ñ†Ð¸ÑŽ Ñ‚ÐµÐºÑÑ‚Ð°, Ð¾Ñ‚ÑÑ‚ÑƒÐ¿Ð°Ñ Ð¾Ñ‚ Ñ†ÐµÐ½Ñ‚Ñ€Ð° ÐºÐ°Ð¼ÐµÑ€Ñ‹
+        app.draw(text);//Ñ€Ð¸ÑÑƒÑŽ ÑÑ‚Ð¾Ñ‚ Ñ‚ÐµÐºÑÑ‚
          i->draw(app);
         }
 
