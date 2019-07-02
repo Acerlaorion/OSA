@@ -1,7 +1,9 @@
 #include <SFML/Graphics.hpp>
 #include <time.h>
 #include <sstream>
-#include <iostream>
+#include <SFML/Audio/Music.hpp>
+#include <SFML/Audio/Listener.hpp>
+#include <SFML/Audio.hpp>
 using namespace sf;
 
 const int W = 1900;
@@ -97,18 +99,20 @@ int main()
 {
     int sc =0;
     int *score = &sc;
-
+    Music music;//создаем объект музыки
+    music.openFromFile("1.flac");//загружаем файл
+    music.play();//воспроизводим музыку
+    Time timer=milliseconds(205000);
+    float t = timer.asMilliseconds();
     srand(time(0));
 
     RenderWindow app(VideoMode(W, H), "OSU!");
     app.setFramerateLimit(60);
-
     Texture t2,t4,t5,t6,t7;
     t2.loadFromFile("images/background.jpg");
     t4.loadFromFile("images/rock.png");
     t5.loadFromFile("images/fire_blue.png");
     t6.loadFromFile("images/rock_small.png");
-    t7.loadFromFile("images/explosions/type_B.png");
     t2.setSmooth(true);
     Sprite background(t2);
 
@@ -129,10 +133,11 @@ int main()
     /////main loop/////
     while (app.isOpen())
     {
+        while(t>0)
+        {
+
+
             Event event;
-        for(auto e:entities)
-         if (e->name=="explosion")
-          if (e->anim.isEnd()) e->life=0;
 
         for(auto i=entities.begin();i!=entities.end();)
         {
@@ -153,36 +158,38 @@ int main()
                         if (event.mouseButton.button == Mouse::Left)
                         {
                             for(int i =0;i<entities.size();i++)
-                            if(((mouse_world.x>=(entities[i]->x)-10)&&(mouse_world.x<=(entities[i]->x)+10))&&((mouse_world.y>=(entities[i]->y)-10)&&(mouse_world.y<=(entities[i]->y)+10)))
+                            if(((mouse_world.x>=(entities[i]->x)-10)&&(mouse_world.x<=(entities[i]->x)+40))&&((mouse_world.y>=(entities[i]->y)-40)&&(mouse_world.y<=(entities[i]->y)+40)))
                             {
-                                sc++;
-                                playerScoreString <<*score ;
-                                std::cout << "YPA";break;
+                                sc+=10000;
+                                break;
                             }
                         }
             }
 
-        Font font;//С€СЂРёС„С‚
-        font.loadFromFile("ALGER.TTF");//РїРµСЂРµРґР°РµРј РЅР°С€РµРјСѓ С€СЂРёС„С‚Сѓ С„Р°Р№Р» С€СЂРёС„С‚Р°
-        Text text("", font, 20);//СЃРѕР·РґР°РµРј РѕР±СЉРµРєС‚ С‚РµРєСЃС‚. Р·Р°РєРёРґС‹РІР°РµРј РІ РѕР±СЉРµРєС‚ С‚РµРєСЃС‚ СЃС‚СЂРѕРєСѓ, С€СЂРёС„С‚, СЂР°Р·РјРµСЂ С€СЂРёС„С‚Р°(РІ РїРёРєСЃРµР»СЏС…);//СЃР°Рј РѕР±СЉРµРєС‚ С‚РµРєСЃС‚ (РЅРµ СЃС‚СЂРѕРєР°)
-        text.setColor(Color::Red);//РїРѕРєСЂР°СЃРёР»Рё С‚РµРєСЃС‚ РІ РєСЂР°СЃРЅС‹Р№. РµСЃР»Рё СѓР±СЂР°С‚СЊ СЌС‚Сѓ СЃС‚СЂРѕРєСѓ, С‚Рѕ РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ РѕРЅ Р±РµР»С‹Р№
-        text.setStyle(Text::Bold);//Р¶РёСЂРЅС‹Р№ С‚РµРєСЃС‚.
+        Font font;//шрифт
+        font.loadFromFile("ALGER.TTF");//передаем нашему шрифту файл шрифта
+        Text text("", font, 20);//создаем объект текст. закидываем в объект текст строку, шрифт, размер шрифта(в пикселях);//сам объект текст (не строка)
+        text.setColor(Color::Red);//покрасили текст в красный. если убрать эту строку, то по умолчанию он белый
+        text.setStyle(Text::Bold);//жирный текст.
        //////draw//////
        app.draw(background);
-            // РѕР±СЉСЏРІРёР»Рё РїРµСЂРµРјРµРЅРЅСѓСЋ
+            // объявили переменную
         for(auto i:entities)
         {
-        text.setString("SCORE:");//Р·Р°РґР°РµРј СЃС‚СЂРѕРєСѓ С‚РµРєСЃС‚Сѓ Рё РІС‹Р·С‹РІР°РµРј СЃС„РѕСЂРјРёСЂРѕРІР°РЅРЅСѓСЋ РІС‹С€Рµ СЃС‚СЂРѕРєСѓ РјРµС‚РѕРґРѕРј .str()
-        text.setPosition(100,200);//Р·Р°РґР°РµРј РїРѕР·РёС†РёСЋ С‚РµРєСЃС‚Р°, РѕС‚СЃС‚СѓРїР°СЏ РѕС‚ С†РµРЅС‚СЂР° РєР°РјРµСЂС‹
-        app.draw(text);//СЂРёСЃСѓСЋ СЌС‚РѕС‚ С‚РµРєСЃС‚
-        text.setString(playerScoreString.str());
-        text.setPosition(180,200);//Р·Р°РґР°РµРј РїРѕР·РёС†РёСЋ С‚РµРєСЃС‚Р°, РѕС‚СЃС‚СѓРїР°СЏ РѕС‚ С†РµРЅС‚СЂР° РєР°РјРµСЂС‹
-        app.draw(text);//СЂРёСЃСѓСЋ СЌС‚РѕС‚ С‚РµРєСЃС‚
+
          i->draw(app);
-        }
-
+       }
+       text.setString("SCORE:");//задаем строку тексту и вызываем сформированную выше строку методом .str()
+        text.setPosition(1750,0);//задаем позицию текста, отступая от центра камеры
+        app.draw(text);//рисую этот текст
+        Text text2("", font, 20);
+        playerScoreString <<*score ;
+        text2.setString(playerScoreString.str());
+        text2.setPosition(1825,0);//задаем позицию текста, отступая от центра камеры
+        app.draw(text2);//рисую этот текст
+        t--;
        app.display();
+        }
+        app.close();
     }
-
-    return 0;
 }
