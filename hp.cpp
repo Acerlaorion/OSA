@@ -1,6 +1,13 @@
-
-void hpdrain()
+#include "hp.h"
+void hpdraintime(int* HP)
 {
-    int HP=100;
-
+    *HP= *HP-1;
+}
+void hpdrainmiss(int* HP)
+{
+    *HP=*HP-10000;
+}
+void hplife(int* HP)
+{
+    *HP=*HP+20000;
 }
