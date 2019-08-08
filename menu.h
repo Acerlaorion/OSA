@@ -1,3 +1,4 @@
+#define SFML_NO_DEPRECATED_WARNINGS
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio/Music.hpp>
 #include <SFML/Audio/Listener.hpp>
@@ -14,12 +15,12 @@ using namespace sf;
 void menu(RenderWindow & window)
 {
     Font font;//шрифт
-    font.loadFromFile("font.ttf");//передаем нашему шрифту файл шрифта
+    font.loadFromFile("STALKERItalic.ttf");//передаем нашему шрифту файл шрифта
     Text namegame("", font, 70);//создаем объект текст. закидываем в объект текст строку, шрифт, размер шрифта(в пикселях);//сам объект текст (не строка)
     namegame.setColor(Color::White);//покрасили текст в красный. если убрать эту строку, то по умолчанию он белый
     namegame.setStyle(sf::Text::Bold);//жирный и подчеркнутый текст. по умолчанию он "худой":)) и не подчеркнутый
     Texture menuTexture1, menuTexture2, menuTexture3, menuBackground, menuLogo, menuIcon1, menuIcon2, menuIcon3,
-    menuIcon1Big, menuIcon2Big, menuIcon3Big;
+    menuIcon1Big, menuIcon2Big, menuIcon3Big, volon, voloff;
     Image iconwindow;
     iconwindow.loadFromFile("images/iconwindow.png");
     menuTexture1.loadFromFile("images/start_game4.png");
@@ -33,13 +34,16 @@ void menu(RenderWindow & window)
     menuIcon2Big.loadFromFile("images/icon2big.png");
     menuIcon3Big.loadFromFile("images/icon3big.png");
     menuLogo.loadFromFile("images/logo3.png");
+    volon.loadFromFile("images/auon.png");
+    voloff.loadFromFile("images/auoff.png");
     Music music;//создаем объект музыки
     music.openFromFile("1.ogg");//загружаем файл
     music.play();//воспроизводим музыку
     int VolumeMusic = 10;
     music.setVolume(10);
     Sprite menu1(menuTexture1), menu2(menuTexture2), menu3(menuTexture3), menuBg(menuBackground), menuLg(menuLogo),
-    icon1(menuIcon1), icon2(menuIcon2), icon3(menuIcon3), icon1Big(menuIcon1Big), icon2Big(menuIcon2Big), icon3Big(menuIcon3Big);
+    icon1(menuIcon1), icon2(menuIcon2), icon3(menuIcon3), icon1Big(menuIcon1Big), icon2Big(menuIcon2Big), icon3Big(menuIcon3Big),
+    von(volon), voff(voloff);
     bool isMenu = 1;
     int menuNum = 0;
     menu1.setPosition(-70, 1);
@@ -53,6 +57,8 @@ void menu(RenderWindow & window)
     icon3Big.setPosition(-100, 3);
     menuBg.setPosition(0, 0);
     menuLg.setPosition(-70, 0);
+    von.setPosition(300, -410);
+    voff.setPosition(330, -410);
     namegame.setPosition(400 , 50 );//задаем позицию текста, центр камеры
     namegame.setString("OSA  Pre-Alpha");//задает строку тексту
     window.setIcon(32, 32, iconwindow.getPixelsPtr());
@@ -76,6 +82,8 @@ void menu(RenderWindow & window)
                 window.draw(menu3);
                 window.draw(icon3);
                 window.draw(menuLg);
+                window.draw(von);
+                window.draw(voff);
                 window.draw(icon1Big);
                 window.draw(namegame);
                 window.display();
@@ -91,6 +99,8 @@ void menu(RenderWindow & window)
                 window.draw(menu3);
                 window.draw(icon3);
                 window.draw(menuLg);
+                window.draw(von);
+                window.draw(voff);
                 window.draw(icon2Big);
                 window.draw(namegame);;
                 window.display();
@@ -106,6 +116,8 @@ void menu(RenderWindow & window)
                 window.draw(icon2);
                 window.draw(menu3);
                 window.draw(menuLg);
+                window.draw(von);
+                window.draw(voff);
                 window.draw(icon3Big);
                 window.draw(namegame);
                 window.display();
@@ -118,13 +130,12 @@ void menu(RenderWindow & window)
                     if(event.type== Event::MouseButtonPressed)
                         if(event.mouseButton.button == Mouse::Left)
                         {
-                           // std::cout << mouse_world.x << std::endl;
-                            //std::cout << mouse_world.y << std::endl;
                             if(((mouse_world.x>=900)&&(mouse_world.x<=1475))&&((mouse_world.y>=225)&&(mouse_world.y<=350)))
                             {
                                 isMenu = false;
                                 menuNum = 0;
-                                if (selectLevel(window) == 1)
+
+                                if (selectLevel(window,&music) == 1)
                                     isMenu = true;
                             }
                             if(((mouse_world.x>=950)&&(mouse_world.x<=1475))&&((mouse_world.y>=435)&&(mouse_world.y<=560)))
@@ -139,6 +150,14 @@ void menu(RenderWindow & window)
                                 isMenu = false;
                                 window.close();
                             }
+                            if(((mouse_world.x>=1287)&&(mouse_world.x<=1403))&&((mouse_world.y>=93)&&(mouse_world.y<=182)))
+                            {
+                                music.play();
+                            }
+                            if(((mouse_world.x>=1461)&&(mouse_world.x<=1584))&&((mouse_world.y>=93)&&(mouse_world.y<=182)))
+                            {
+                                music.pause();
+                            }
                         }
             }
     window.draw(menuBg);
@@ -149,6 +168,8 @@ void menu(RenderWindow & window)
     window.draw(menu3);
     window.draw(icon3);
     window.draw(menuLg);
+    window.draw(von);
+    window.draw(voff);
     window.draw(namegame);
     window.display();
     }
