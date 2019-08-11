@@ -118,26 +118,22 @@ bool Gameplay(RenderWindow & app, Music* music)
     app.setFramerateLimit(60);
     music->openFromFile("audio.ogg");
 
-    Texture t1,t2,t4,t3;
+    Texture t1,t2,t4,t3,t5;
     t2.loadFromFile("images/BG.jpg");
+    t1.loadFromFile("images/hit300.png");
+    t3.loadFromFile("images/hit100.png");
+    t5.loadFromFile("images/hit50.png");
     t4.loadFromFile("images/rock.png");
     //t3.loadFromFile("images/cursor.png");
     app.setMouseCursorVisible(true);
-    t1.setSmooth(false);
-    t2.setSmooth(false);
     Sprite background(t2);
-    //Sprite cursor(t3);
+    Sprite hit300(t1);
+    Sprite hit100(t3);
+    Sprite hit50(t5);
     Animation sRock(t4,0,0,64,64,16);
     int x0=388;
     int y0=150;
 
-    /*if(clock1.getElapsedTime().asMilliseconds()==2657)
-    {
-        Entity *a =new Entity();
-        a->settings(sRock, 200 + rand()%(1000 - 200),200 + rand()%(1000 - 200),100 + rand()%(100 - 50));
-        entities.push_back(a);
-    }*/
-    /////main loop/////
     float Coef= 1.5;
      Entity *o2 =new Entity();
         o2->settings(sRock,(236+x0)*Coef,(92+y0)*Coef);
@@ -394,664 +390,2762 @@ bool Gameplay(RenderWindow & app, Music* music)
                 if(event.type== Event::MouseButtonPressed)
                         if((event.mouseButton.button == Mouse::Left)||(event.mouseButton.button == Mouse::Right))
                         {
-                            if(((clock1.getElapsedTime().asMilliseconds()>=0)&&(clock1.getElapsedTime().asMilliseconds()<=285))&&o2!=nullptr)
-                            if(((mouse_world.x>=(o2->x)-24)&&(mouse_world.x<=(o2->x)+24))&&((mouse_world.y>=(o2->y)-24)&&(mouse_world.y<=(o2->y)+24)))
+                            if(o2!=nullptr&&(((mouse_world.x>=(o2->x)-24)&&(mouse_world.x<=(o2->x)+24))&&((mouse_world.y>=(o2->y)-24)&&(mouse_world.y<=(o2->y)+24))))
+
+                            if(((clock1.getElapsedTime().asMilliseconds()>=285-62)&&(clock1.getElapsedTime().asMilliseconds()<=1342+62))&&o2!=nullptr)//300
                             {
+                                hit300.setPosition(X3,Y3);
+                                o2=nullptr;
+                                delete o2;
+                                sc=sc+(300*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit300);
+                                app.display();
+                            }
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=285-62-54)&&(clock1.getElapsedTime().asMilliseconds()<=285-62))&&o2!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=285+62)&&(clock1.getElapsedTime().asMilliseconds()<=285+62+54))&&o2!=nullptr))//100
+                            {
+                                hit100.setPosition(X3,Y3);
                                 o2=nullptr;
                                 delete o2;
                                 sc=sc+(100*cb);
                                 hplife(HP);
                                 cb++;
+                                app.draw(hit100);
+                                app.display();
                             }
-                            if(((clock1.getElapsedTime().asMilliseconds()>=1342-1440)&&(clock1.getElapsedTime().asMilliseconds()<=1342))&&o3!=nullptr)
-                            if(((mouse_world.x>=(o3->x)-24)&&(mouse_world.x<=(o3->x)+24))&&((mouse_world.y>=(o3->y)-24)&&(mouse_world.y<=(o3->y)+24)))
-
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=1342-62-54-54)&&(clock1.getElapsedTime().asMilliseconds()<=285-62-54))&&o2!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=285+62+54)&&(clock1.getElapsedTime().asMilliseconds()<=285+62+54+54))&&o2!=nullptr))//50
                             {
+                                hit50.setPosition(X3,Y3);
+                                o2=nullptr;
+                                delete o2;
+                                sc=sc+(50*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit50);
+                                app.display();
+                            }
+
+                            if(o3!=nullptr&&(((mouse_world.x>=(o3->x)-24)&&(mouse_world.x<=(o3->x)+24))&&((mouse_world.y>=(o3->y)-24)&&(mouse_world.y<=(o3->y)+24))))
+                            {
+                            if(((clock1.getElapsedTime().asMilliseconds()>=1342-62)&&(clock1.getElapsedTime().asMilliseconds()<=1342+62))&&o3!=nullptr)//300
+                            {
+                                hit300.setPosition(X3,Y3);
+                                o3=nullptr;
+                                delete o3;
+                                sc=sc+(300*cb);
+                                hplife(HP);
+                                cb++;
+
+                                app.draw(hit300);
+                                app.display();
+                            }
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=1342-62-54)&&(clock1.getElapsedTime().asMilliseconds()<=1342-62))&&o3!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=1342+62)&&(clock1.getElapsedTime().asMilliseconds()<=1342+62+54))&&o3!=nullptr))//100
+                            {
+                                hit100.setPosition(X3,Y3);
                                 o3=nullptr;
                                 delete o3;
                                 sc=sc+(100*cb);
                                 hplife(HP);
                                 cb++;
+                                app.draw(hit100);
+                                app.display();
                             }
-                            if(((clock1.getElapsedTime().asMilliseconds()>=1764-1440)&&(clock1.getElapsedTime().asMilliseconds()<=1764))&&o4!=nullptr)
-                            if(((mouse_world.x>=(o4->x)-24)&&(mouse_world.x<=(o4->x)+24))&&((mouse_world.y>=(o4->y)-24)&&(mouse_world.y<=(o4->y)+24)))
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=1342-62-54-54)&&(clock1.getElapsedTime().asMilliseconds()<=1342-62-54))&&o3!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=1342+62+54)&&(clock1.getElapsedTime().asMilliseconds()<=1342+62+54+54))&&o3!=nullptr))//50
                             {
+                                hit50.setPosition(X3,Y3);
+                                o3=nullptr;
+                                delete o3;
+                                sc=sc+(50*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit50);
+                                app.display();
+                            }
+                            }
+                            if(o4!=nullptr&&(((mouse_world.x>=(o4->x)-24)&&(mouse_world.x<=(o4->x)+24))&&((mouse_world.y>=(o4->y)-24)&&(mouse_world.y<=(o4->y)+24))))
+                            {
+                            if(((clock1.getElapsedTime().asMilliseconds()>=1764-62)&&(clock1.getElapsedTime().asMilliseconds()<=1764+62))&&o4!=nullptr)//300
+                            {
+                                hit300.setPosition(X4,Y4);
+                                o4=nullptr;
+                                delete o4;
+                                sc=sc+(300*cb);
+                                hplife(HP);
+                                cb++;
+
+                                app.draw(hit300);
+                                app.display();
+                            }
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=1764-62-54)&&(clock1.getElapsedTime().asMilliseconds()<=1764-62))&&o4!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=1764+62)&&(clock1.getElapsedTime().asMilliseconds()<=1764+62+54))&&o4!=nullptr))//100
+                            {
+                                hit100.setPosition(X4,Y4);
                                 o4=nullptr;
                                 delete o4;
                                 sc=sc+(100*cb);
                                 hplife(HP);
                                 cb++;
+                                app.draw(hit100);
+                                app.display();
                             }
-                            if(((clock1.getElapsedTime().asMilliseconds()>=2609-1440)&&(clock1.getElapsedTime().asMilliseconds()<=2609))&&o5!=nullptr)
-                            if(((mouse_world.x>=(o5->x)-24)&&(mouse_world.x<=(o5->x)+24))&&((mouse_world.y>=(o5->y)-24)&&(mouse_world.y<=(o5->y)+24)))
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=1764-62-54-54)&&(clock1.getElapsedTime().asMilliseconds()<=1764-62-54))&&o4!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=1764+62+54)&&(clock1.getElapsedTime().asMilliseconds()<=1764+62+54+54))&&o4!=nullptr))//50
                             {
+                                hit50.setPosition(X4,Y4);
+                                o4=nullptr;
+                                delete o4;
+                                sc=sc+(50*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit50);
+                                app.display();
+                            }
+                            }
+                            if(o5!=nullptr&&(((mouse_world.x>=(o5->x)-24)&&(mouse_world.x<=(o5->x)+24))&&((mouse_world.y>=(o5->y)-24)&&(mouse_world.y<=(o5->y)+24))))
+                            {
+                            if(((clock1.getElapsedTime().asMilliseconds()>=2609-62)&&(clock1.getElapsedTime().asMilliseconds()<=2609+62))&&o5!=nullptr)//300
+                            {
+                                hit300.setPosition(X5,Y5);
+                                o5=nullptr;
+                                delete o5;
+                                sc=sc+(300*cb);
+                                hplife(HP);
+                                cb++;
+
+                                app.draw(hit300);
+                                app.display();
+                            }
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=2609-62-54)&&(clock1.getElapsedTime().asMilliseconds()<=2609-62))&&o5!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=2609+62)&&(clock1.getElapsedTime().asMilliseconds()<=2609+62+54))&&o5!=nullptr))//100
+                            {
+                                hit100.setPosition(X5,Y5);
                                 o5=nullptr;
                                 delete o5;
                                 sc=sc+(100*cb);
                                 hplife(HP);
                                 cb++;
+                                app.draw(hit100);
+                                app.display();
                             }
-                            if(((clock1.getElapsedTime().asMilliseconds()>=3032-1440)&&(clock1.getElapsedTime().asMilliseconds()<=3032))&&o6!=nullptr)
-                            if(((mouse_world.x>=(o6->x)-24)&&(mouse_world.x<=(o6->x)+24))&&((mouse_world.y>=(o6->y)-24)&&(mouse_world.y<=(o6->y)+24)))
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=2609-62-54-54)&&(clock1.getElapsedTime().asMilliseconds()<=2609-62-54))&&o5!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=2609+62+54)&&(clock1.getElapsedTime().asMilliseconds()<=2609+62+54+54))&&o5!=nullptr))//50
                             {
+                                hit50.setPosition(X5,Y5);
+                                o5=nullptr;
+                                delete o5;
+                                sc=sc+(50*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit50);
+                                app.display();
+                            }
+                            }
+                            if(o6!=nullptr&&(((mouse_world.x>=(o6->x)-24)&&(mouse_world.x<=(o6->x)+24))&&((mouse_world.y>=(o6->y)-24)&&(mouse_world.y<=(o6->y)+24))))
+                            {
+                            if(((clock1.getElapsedTime().asMilliseconds()>=3032-62)&&(clock1.getElapsedTime().asMilliseconds()<=3032+62))&&o6!=nullptr)//300
+                            {
+                                hit300.setPosition(X6,Y6);
+                                o6=nullptr;
+                                delete o6;
+                                sc=sc+(300*cb);
+                                hplife(HP);
+                                cb++;
+
+                                app.draw(hit300);
+                                app.display();
+                            }
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=3032-62-54)&&(clock1.getElapsedTime().asMilliseconds()<=3032-62))&&o6!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=3032+62)&&(clock1.getElapsedTime().asMilliseconds()<=3032+62+54))&&o6!=nullptr))//100
+                            {
+                                hit100.setPosition(X6,Y6);
                                 o6=nullptr;
                                 delete o6;
                                 sc=sc+(100*cb);
                                 hplife(HP);
                                 cb++;
+                                app.draw(hit100);
+                                app.display();
                             }
-                            if(((clock1.getElapsedTime().asMilliseconds()>=3877-1440)&&(clock1.getElapsedTime().asMilliseconds()<=3877))&&o7!=nullptr)
-                            if(((mouse_world.x>=(o7->x)-24)&&(mouse_world.x<=(o7->x)+24))&&((mouse_world.y>=(o7->y)-24)&&(mouse_world.y<=(o7->y)+24)))
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=3032-62-54-54)&&(clock1.getElapsedTime().asMilliseconds()<=3032-62-54))&&o6!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=3032+62+54)&&(clock1.getElapsedTime().asMilliseconds()<=3032+62+54+54))&&o6!=nullptr))//50
                             {
+                                hit50.setPosition(X6,Y6);
+                                o6=nullptr;
+                                delete o6;
+                                sc=sc+(50*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit50);
+                                app.display();
+                            }
+                            }
+                            if(o7!=nullptr&&(((mouse_world.x>=(o7->x)-24)&&(mouse_world.x<=(o7->x)+24))&&((mouse_world.y>=(o7->y)-24)&&(mouse_world.y<=(o7->y)+24))))
+                            {
+                            if(((clock1.getElapsedTime().asMilliseconds()>=3877-62)&&(clock1.getElapsedTime().asMilliseconds()<=3877+62))&&o7!=nullptr)//300
+                            {
+                                hit300.setPosition(X7,Y7);
+                                o7=nullptr;
+                                delete o7;
+                                sc=sc+(300*cb);
+                                hplife(HP);
+                                cb++;
+
+                                app.draw(hit300);
+                                app.display();
+                            }
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=3877-62-54)&&(clock1.getElapsedTime().asMilliseconds()<=3877-62))&&o7!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=3877+62)&&(clock1.getElapsedTime().asMilliseconds()<=3877+62+54))&&o7!=nullptr))//100
+                            {
+                                hit100.setPosition(X7,Y7);
                                 o7=nullptr;
                                 delete o7;
                                 sc=sc+(100*cb);
                                 hplife(HP);
                                 cb++;
+                                app.draw(hit100);
+                                app.display();
                             }
-                            if(((clock1.getElapsedTime().asMilliseconds()>=4722-1440)&&(clock1.getElapsedTime().asMilliseconds()<=4722))&&o8!=nullptr)
-                            if(((mouse_world.x>=(o8->x)-24)&&(mouse_world.x<=(o8->x)+24))&&((mouse_world.y>=(o8->y)-24)&&(mouse_world.y<=(o8->y)+24)))
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=3877-62-54-54)&&(clock1.getElapsedTime().asMilliseconds()<=3877-62-54))&&o7!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=3877+62+54)&&(clock1.getElapsedTime().asMilliseconds()<=3877+62+54+54))&&o7!=nullptr))//50
                             {
+                                hit50.setPosition(X7,Y7);
+                                o7=nullptr;
+                                delete o7;
+                                sc=sc+(50*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit50);
+                                app.display();
+                            }
+                            }
+                            if(o8!=nullptr&&(((mouse_world.x>=(o8->x)-24)&&(mouse_world.x<=(o8->x)+24))&&((mouse_world.y>=(o8->y)-24)&&(mouse_world.y<=(o8->y)+24))))
+                            {
+                            if(((clock1.getElapsedTime().asMilliseconds()>=4722-62)&&(clock1.getElapsedTime().asMilliseconds()<=4722+62))&&o8!=nullptr)//300
+                            {
+                                hit300.setPosition(X8,Y8);
+                                o8=nullptr;
+                                delete o8;
+                                sc=sc+(300*cb);
+                                hplife(HP);
+                                cb++;
+
+                                app.draw(hit300);
+                                app.display();
+                            }
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=4722-62-54)&&(clock1.getElapsedTime().asMilliseconds()<=4722-62))&&o8!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=4722+62)&&(clock1.getElapsedTime().asMilliseconds()<=4722+62+54))&&o8!=nullptr))//100
+                            {
+                                hit100.setPosition(X8,Y8);
                                 o8=nullptr;
                                 delete o8;
                                 sc=sc+(100*cb);
                                 hplife(HP);
                                 cb++;
+                                app.draw(hit100);
+                                app.display();
                             }
-                            if(((clock1.getElapsedTime().asMilliseconds()>=5567-1440)&&(clock1.getElapsedTime().asMilliseconds()<=5567))&&o9!=nullptr)
-                            if(((mouse_world.x>=(o9->x)-24)&&(mouse_world.x<=(o9->x)+24))&&((mouse_world.y>=(o9->y)-24)&&(mouse_world.y<=(o9->y)+24)))
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=4722-62-54-54)&&(clock1.getElapsedTime().asMilliseconds()<=4722-62-54))&&o8!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=4722+62+54)&&(clock1.getElapsedTime().asMilliseconds()<=4722+62+54+54))&&o8!=nullptr))//50
                             {
+                                hit50.setPosition(X8,Y8);
+                                o8=nullptr;
+                                delete o8;
+                                sc=sc+(50*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit50);
+                                app.display();
+                            }
+                            }
+                            if(o9!=nullptr&&(((mouse_world.x>=(o9->x)-24)&&(mouse_world.x<=(o9->x)+24))&&((mouse_world.y>=(o9->y)-24)&&(mouse_world.y<=(o9->y)+24))))
+                            {
+                            if(((clock1.getElapsedTime().asMilliseconds()>=5567-62)&&(clock1.getElapsedTime().asMilliseconds()<=5567+62))&&o9!=nullptr)//300
+                            {
+                                hit300.setPosition(X9,Y9);
+                                o9=nullptr;
+                                delete o9;
+                                sc=sc+(300*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit300);
+                                app.display();
+                            }
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=5567-62-54)&&(clock1.getElapsedTime().asMilliseconds()<=5567-62))&&o9!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=5567+62)&&(clock1.getElapsedTime().asMilliseconds()<=5567+62+54))&&o9!=nullptr))//100
+                            {
+                                hit100.setPosition(X9,Y9);
                                 o9=nullptr;
                                 delete o9;
                                 sc=sc+(100*cb);
                                 hplife(HP);
                                 cb++;
+                                app.draw(hit100);
+                                app.display();
                             }
-                            if(((clock1.getElapsedTime().asMilliseconds()>=6412-1440)&&(clock1.getElapsedTime().asMilliseconds()<=6412))&&o10!=nullptr)
-                            if(((mouse_world.x>=(o10->x)-24)&&(mouse_world.x<=(o10->x)+24))&&((mouse_world.y>=(o10->y)-24)&&(mouse_world.y<=(o10->y)+24)))
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=5567-62-54-54)&&(clock1.getElapsedTime().asMilliseconds()<=5567-62-54))&&o9!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=5567+62+54)&&(clock1.getElapsedTime().asMilliseconds()<=5567+62+54+54))&&o9!=nullptr))//50
                             {
+                                hit50.setPosition(X9,Y9);
+                                o9=nullptr;
+                                delete o9;
+                                sc=sc+(50*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit50);
+                                app.display();
+                            }
+                            }
+                            if(o10!=nullptr&&(((mouse_world.x>=(o10->x)-24)&&(mouse_world.x<=(o10->x)+24))&&((mouse_world.y>=(o10->y)-24)&&(mouse_world.y<=(o10->y)+24))))
+                            {
+                            if(((clock1.getElapsedTime().asMilliseconds()>=6412-62)&&(clock1.getElapsedTime().asMilliseconds()<=6412+62))&&o10!=nullptr)//300
+                            {
+                                hit300.setPosition(X10,Y10);
+                                o10=nullptr;
+                                delete o10;
+                                sc=sc+(300*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit300);
+                                app.display();
+                            }
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=6412-62-54)&&(clock1.getElapsedTime().asMilliseconds()<=6412-62))&&o10!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=6412+62)&&(clock1.getElapsedTime().asMilliseconds()<=6412+62+54))&&o10!=nullptr))//100
+                            {
+                                hit100.setPosition(X10,Y10);
                                 o10=nullptr;
                                 delete o10;
                                 sc=sc+(100*cb);
                                 hplife(HP);
                                 cb++;
+                                app.draw(hit100);
+                                app.display();
                             }
-                            if(((clock1.getElapsedTime().asMilliseconds()>=7680-1440)&&(clock1.getElapsedTime().asMilliseconds()<=7680))&&o11!=nullptr)
-                            if(((mouse_world.x>=(o11->x)-24)&&(mouse_world.x<=(o11->x)+24))&&((mouse_world.y>=(o11->y)-24)&&(mouse_world.y<=(o11->y)+24)))
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=6412-62-54-54)&&(clock1.getElapsedTime().asMilliseconds()<=6412-62-54))&&o10!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=6412+62+54)&&(clock1.getElapsedTime().asMilliseconds()<=6412+62+54+54))&&o10!=nullptr))//50
                             {
+                                hit50.setPosition(X10,Y10);
+                                o10=nullptr;
+                                delete o10;
+                                sc=sc+(50*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit50);
+                                app.display();
+                            }
+                            }
+                            if(o11!=nullptr&&(((mouse_world.x>=(o11->x)-24)&&(mouse_world.x<=(o11->x)+24))&&((mouse_world.y>=(o11->y)-24)&&(mouse_world.y<=(o11->y)+24))))
+                            {
+                            if(((clock1.getElapsedTime().asMilliseconds()>=7680-62)&&(clock1.getElapsedTime().asMilliseconds()<=7680+62))&&o11!=nullptr)//300
+                            {
+                                hit300.setPosition(X11,Y11);
+                                o11=nullptr;
+                                delete o11;
+                                sc=sc+(300*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit300);
+                                app.display();
+                            }
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=7680-62-54)&&(clock1.getElapsedTime().asMilliseconds()<=7680-62))&&o11!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=7680+62)&&(clock1.getElapsedTime().asMilliseconds()<=7680+62+54))&&o11!=nullptr))//100
+                            {
+                                hit100.setPosition(X11,Y11);
                                 o11=nullptr;
                                 delete o11;
                                 sc=sc+(100*cb);
                                 hplife(HP);
                                 cb++;
+                                app.draw(hit100);
+                                app.display();
                             }
-                            if(((clock1.getElapsedTime().asMilliseconds()>=8102-1440)&&(clock1.getElapsedTime().asMilliseconds()<=8102))&&o12!=nullptr)
-                            if(((mouse_world.x>=(o12->x)-24)&&(mouse_world.x<=(o12->x)+24))&&((mouse_world.y>=(o12->y)-24)&&(mouse_world.y<=(o12->y)+24)))
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=7680-62-54-54)&&(clock1.getElapsedTime().asMilliseconds()<=7680-62-54))&&o11!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=7680+62+54)&&(clock1.getElapsedTime().asMilliseconds()<=7680+62+54+54))&&o11!=nullptr))//50
                             {
+                                hit50.setPosition(X11,Y11);
+                                o11=nullptr;
+                                delete o11;
+                                sc=sc+(50*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit50);
+                                app.display();
+                            }
+                            }
+                            if(o12!=nullptr&&(((mouse_world.x>=(o12->x)-24)&&(mouse_world.x<=(o12->x)+24))&&((mouse_world.y>=(o12->y)-24)&&(mouse_world.y<=(o12->y)+24))))
+                            {
+                            if(((clock1.getElapsedTime().asMilliseconds()>=8102-62)&&(clock1.getElapsedTime().asMilliseconds()<=8102+62))&&o12!=nullptr)//300
+                            {
+                                hit300.setPosition(X12,Y12);
+                                o12=nullptr;
+                                delete o12;
+                                sc=sc+(300*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit300);
+                                app.display();
+                            }
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=8102-62-54)&&(clock1.getElapsedTime().asMilliseconds()<=8102-62))&&o12!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=8102+62)&&(clock1.getElapsedTime().asMilliseconds()<=8102+62+54))&&o12!=nullptr))//100
+                            {
+                                hit100.setPosition(X12,Y12);
                                 o12=nullptr;
                                 delete o12;
                                 sc=sc+(100*cb);
                                 hplife(HP);
                                 cb++;
+                                app.draw(hit100);
+                                app.display();
                             }
-                            if(((clock1.getElapsedTime().asMilliseconds()>=8947-1440)&&(clock1.getElapsedTime().asMilliseconds()<=8947))&&o13!=nullptr)
-                            if(((mouse_world.x>=(o13->x)-24)&&(mouse_world.x<=(o13->x)+24))&&((mouse_world.y>=(o13->y)-24)&&(mouse_world.y<=(o13->y)+24)))
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=8102-62-54-54)&&(clock1.getElapsedTime().asMilliseconds()<=8102-62-54))&&o12!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=8102+62+54)&&(clock1.getElapsedTime().asMilliseconds()<=8102+62+54+54))&&o12!=nullptr))//50
                             {
+                                hit50.setPosition(X12,Y12);
+                                o12=nullptr;
+                                delete o12;
+                                sc=sc+(50*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit50);
+                                app.display();
+                            }
+                            }
+                            if(o13!=nullptr&&(((mouse_world.x>=(o13->x)-24)&&(mouse_world.x<=(o13->x)+24))&&((mouse_world.y>=(o13->y)-24)&&(mouse_world.y<=(o13->y)+24))))
+                            {
+                            if(((clock1.getElapsedTime().asMilliseconds()>=8947-62)&&(clock1.getElapsedTime().asMilliseconds()<=8947+62))&&o13!=nullptr)//300
+                            {
+                                hit300.setPosition(X13,Y13);
+                                o13=nullptr;
+                                delete o13;
+                                sc=sc+(300*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit300);
+                                app.display();
+                            }
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=8947-62-54)&&(clock1.getElapsedTime().asMilliseconds()<=8947-62))&&o13!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=8947+62)&&(clock1.getElapsedTime().asMilliseconds()<=8947+62+54))&&o13!=nullptr))//100
+                            {
+                                hit100.setPosition(X13,Y13);
                                 o13=nullptr;
                                 delete o13;
                                 sc=sc+(100*cb);
                                 hplife(HP);
                                 cb++;
+                                app.draw(hit100);
+                                app.display();
                             }
-                            if(((clock1.getElapsedTime().asMilliseconds()>=9792-1440)&&(clock1.getElapsedTime().asMilliseconds()<=9792))&&o14!=nullptr)
-                            if(((mouse_world.x>=(o14->x)-24)&&(mouse_world.x<=(o14->x)+24))&&((mouse_world.y>=(o14->y)-24)&&(mouse_world.y<=(o14->y)+24)))
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=8947-62-54-54)&&(clock1.getElapsedTime().asMilliseconds()<=8947-62-54))&&o13!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=8947+62+54)&&(clock1.getElapsedTime().asMilliseconds()<=8947+62+54+54))&&o13!=nullptr))//50
                             {
+                                hit50.setPosition(X13,Y13);
+                                o13=nullptr;
+                                delete o13;
+                                sc=sc+(50*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit50);
+                                app.display();
+                            }
+                            }
+                            if(o14!=nullptr&&(((mouse_world.x>=(o14->x)-24)&&(mouse_world.x<=(o14->x)+24))&&((mouse_world.y>=(o14->y)-24)&&(mouse_world.y<=(o14->y)+24))))
+                            {
+                            if(((clock1.getElapsedTime().asMilliseconds()>=9792-62)&&(clock1.getElapsedTime().asMilliseconds()<=9792+62))&&o14!=nullptr)//300
+                            {
+                                hit300.setPosition(X14,Y14);
+                                o14=nullptr;
+                                delete o14;
+                                sc=sc+(300*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit300);
+                                app.display();
+                            }
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=9792-62-54)&&(clock1.getElapsedTime().asMilliseconds()<=9792-62))&&o14!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=9792+62)&&(clock1.getElapsedTime().asMilliseconds()<=9792+62+54))&&o14!=nullptr))//100
+                            {
+                                hit100.setPosition(X14,Y14);
                                 o14=nullptr;
                                 delete o14;
                                 sc=sc+(100*cb);
                                 hplife(HP);
                                 cb++;
+                                app.draw(hit100);
+                                app.display();
                             }
-                            if(((clock1.getElapsedTime().asMilliseconds()>=10637-1440)&&(clock1.getElapsedTime().asMilliseconds()<=10637))&&o15!=nullptr)
-                            if(((mouse_world.x>=(o15->x)-24)&&(mouse_world.x<=(o15->x)+24))&&((mouse_world.y>=(o15->y)-24)&&(mouse_world.y<=(o15->y)+24)))
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=9792-62-54-54)&&(clock1.getElapsedTime().asMilliseconds()<=9792-62-54))&&o14!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=9792+62+54)&&(clock1.getElapsedTime().asMilliseconds()<=9792+62+54+54))&&o14!=nullptr))//50
                             {
+                                hit50.setPosition(X14,Y14);
+                                o14=nullptr;
+                                delete o14;
+                                sc=sc+(50*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit50);
+                                app.display();
+                            }
+                            }
+                            if(o15!=nullptr&&(((mouse_world.x>=(o15->x)-24)&&(mouse_world.x<=(o15->x)+24))&&((mouse_world.y>=(o15->y)-24)&&(mouse_world.y<=(o15->y)+24))))
+                            {
+                            if(((clock1.getElapsedTime().asMilliseconds()>=10637-62)&&(clock1.getElapsedTime().asMilliseconds()<=10637+62))&&o15!=nullptr)//300
+                            {
+                                hit300.setPosition(X15,Y15);
+                                o15=nullptr;
+                                delete o15;
+                                sc=sc+(300*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit300);
+                                app.display();
+                            }
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=10637-62-54)&&(clock1.getElapsedTime().asMilliseconds()<=10637-62))&&o15!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=10637+62)&&(clock1.getElapsedTime().asMilliseconds()<=10637+62+54))&&o15!=nullptr))//100
+                            {
+                                hit100.setPosition(X15,Y15);
                                 o15=nullptr;
                                 delete o15;
                                 sc=sc+(100*cb);
                                 hplife(HP);
                                 cb++;
+                                app.draw(hit100);
+                                app.display();
                             }
-                            if(((clock1.getElapsedTime().asMilliseconds()>=11482-1440)&&(clock1.getElapsedTime().asMilliseconds()<=11482))&&o16!=nullptr)
-                            if(((mouse_world.x>=(o16->x)-24)&&(mouse_world.x<=(o16->x)+24))&&((mouse_world.y>=(o16->y)-24)&&(mouse_world.y<=(o16->y)+24)))
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=10637-62-54-54)&&(clock1.getElapsedTime().asMilliseconds()<=10637-62-54))&&o15!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=10637+62+54)&&(clock1.getElapsedTime().asMilliseconds()<=10637+62+54+54))&&o15!=nullptr))//50
                             {
+                                hit50.setPosition(X15,Y15);
+                                o15=nullptr;
+                                delete o15;
+                                sc=sc+(50*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit50);
+                                app.display();
+                            }
+                            }
+                            if(o16!=nullptr&&(((mouse_world.x>=(o16->x)-24)&&(mouse_world.x<=(o16->x)+24))&&((mouse_world.y>=(o16->y)-24)&&(mouse_world.y<=(o16->y)+24))))
+                            {
+                            if(((clock1.getElapsedTime().asMilliseconds()>=11482-62)&&(clock1.getElapsedTime().asMilliseconds()<=11482+62))&&o16!=nullptr)//300
+                            {
+                                hit300.setPosition(X16,Y16);
+                                o16=nullptr;
+                                delete o16;
+                                sc=sc+(300*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit300);
+                                app.display();
+                            }
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=11482-62-54)&&(clock1.getElapsedTime().asMilliseconds()<=11482-62))&&o16!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=11482+62)&&(clock1.getElapsedTime().asMilliseconds()<=11482+62+54))&&o16!=nullptr))//100
+                            {
+                                hit100.setPosition(X16,Y16);
                                 o16=nullptr;
                                 delete o16;
                                 sc=sc+(100*cb);
                                 hplife(HP);
                                 cb++;
+                                app.draw(hit100);
+                                app.display();
                             }
-                            if(((clock1.getElapsedTime().asMilliseconds()>=12328-1440)&&(clock1.getElapsedTime().asMilliseconds()<=12328))&&o17!=nullptr)
-                            if(((mouse_world.x>=(o17->x)-24)&&(mouse_world.x<=(o17->x)+24))&&((mouse_world.y>=(o17->y)-24)&&(mouse_world.y<=(o17->y)+24)))
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=11482-62-54-54)&&(clock1.getElapsedTime().asMilliseconds()<=11482-62-54))&&o16!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=11482+62+54)&&(clock1.getElapsedTime().asMilliseconds()<=11482+62+54+54))&&o16!=nullptr))//50
                             {
+                                hit50.setPosition(X16,Y16);
+                                o16=nullptr;
+                                delete o16;
+                                sc=sc+(50*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit50);
+                                app.display();
+                            }
+                            }
+                            if(o17!=nullptr&&(((mouse_world.x>=(o17->x)-24)&&(mouse_world.x<=(o17->x)+24))&&((mouse_world.y>=(o17->y)-24)&&(mouse_world.y<=(o17->y)+24))))
+                            {
+                            if(((clock1.getElapsedTime().asMilliseconds()>=12328-62)&&(clock1.getElapsedTime().asMilliseconds()<=12328+62))&&o17!=nullptr)//300
+                            {
+                                hit300.setPosition(X17,Y17);
+                                o17=nullptr;
+                                delete o17;
+                                sc=sc+(300*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit300);
+                                app.display();
+                            }
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=12328-62-54)&&(clock1.getElapsedTime().asMilliseconds()<=12328-62))&&o17!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=12328+62)&&(clock1.getElapsedTime().asMilliseconds()<=12328+62+54))&&o17!=nullptr))//100
+                            {
+                                hit100.setPosition(X17,Y17);
                                 o17=nullptr;
                                 delete o17;
                                 sc=sc+(100*cb);
                                 hplife(HP);
                                 cb++;
+                                app.draw(hit100);
+                                app.display();
                             }
-                            if(((clock1.getElapsedTime().asMilliseconds()>=13173-1440)&&(clock1.getElapsedTime().asMilliseconds()<=13173))&&o18!=nullptr)
-                            if(((mouse_world.x>=(o18->x)-24)&&(mouse_world.x<=(o18->x)+24))&&((mouse_world.y>=(o18->y)-24)&&(mouse_world.y<=(o18->y)+24)))
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=12328-62-54-54)&&(clock1.getElapsedTime().asMilliseconds()<=12328-62-54))&&o17!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=12328+62+54)&&(clock1.getElapsedTime().asMilliseconds()<=12328+62+54+54))&&o17!=nullptr))//50
                             {
+                                hit50.setPosition(X17,Y17);
+                                o17=nullptr;
+                                delete o17;
+                                sc=sc+(50*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit50);
+                                app.display();
+                            }
+                            }
+                            if(o18!=nullptr&&(((mouse_world.x>=(o18->x)-24)&&(mouse_world.x<=(o18->x)+24))&&((mouse_world.y>=(o18->y)-24)&&(mouse_world.y<=(o18->y)+24))))
+                            {
+                            if(((clock1.getElapsedTime().asMilliseconds()>=13173-62)&&(clock1.getElapsedTime().asMilliseconds()<=13173+62))&&o18!=nullptr)//300
+                            {
+                                hit300.setPosition(X18,Y18);
+                                o18=nullptr;
+                                delete o18;
+                                sc=sc+(300*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit300);
+                                app.display();
+                            }
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=13173-62-54)&&(clock1.getElapsedTime().asMilliseconds()<=13173-62))&&o18!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=13173+62)&&(clock1.getElapsedTime().asMilliseconds()<=13173+62+54))&&o18!=nullptr))//100
+                            {
+                                hit100.setPosition(X18,Y18);
                                 o18=nullptr;
                                 delete o18;
                                 sc=sc+(100*cb);
                                 hplife(HP);
                                 cb++;
+                                app.draw(hit100);
+                                app.display();
                             }
-                            if(((clock1.getElapsedTime().asMilliseconds()>=14440-1440)&&(clock1.getElapsedTime().asMilliseconds()<=14440))&&o19!=nullptr)
-                            if(((mouse_world.x>=(o19->x)-24)&&(mouse_world.x<=(o19->x)+24))&&((mouse_world.y>=(o19->y)-24)&&(mouse_world.y<=(o19->y)+24)))
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=13173-62-54-54)&&(clock1.getElapsedTime().asMilliseconds()<=13173-62-54))&&o18!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=13173+62+54)&&(clock1.getElapsedTime().asMilliseconds()<=13173+62+54+54))&&o18!=nullptr))//50
                             {
+                                hit50.setPosition(X18,Y18);
+                                o18=nullptr;
+                                delete o18;
+                                sc=sc+(50*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit50);
+                                app.display();
+                            }
+                            }
+                            if(o19!=nullptr&&(((mouse_world.x>=(o19->x)-24)&&(mouse_world.x<=(o19->x)+24))&&((mouse_world.y>=(o19->y)-24)&&(mouse_world.y<=(o19->y)+24))))
+                            {
+                            if(((clock1.getElapsedTime().asMilliseconds()>=14440-62)&&(clock1.getElapsedTime().asMilliseconds()<=14440+62))&&o19!=nullptr)//300
+                            {
+                                hit300.setPosition(X19,Y19);
+                                o19=nullptr;
+                                delete o19;
+                                sc=sc+(300*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit300);
+                                app.display();
+                            }
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=14440-62-54)&&(clock1.getElapsedTime().asMilliseconds()<=14440-62))&&o19!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=14440+62)&&(clock1.getElapsedTime().asMilliseconds()<=14440+62+54))&&o19!=nullptr))//100
+                            {
+                                hit100.setPosition(X19,Y19);
                                 o19=nullptr;
                                 delete o19;
                                 sc=sc+(100*cb);
                                 hplife(HP);
                                 cb++;
+                                app.draw(hit100);
+                                app.display();
                             }
-                            if(((clock1.getElapsedTime().asMilliseconds()>=14863-1440)&&(clock1.getElapsedTime().asMilliseconds()<=14863))&&o20!=nullptr)
-                            if(((mouse_world.x>=(o20->x)-24)&&(mouse_world.x<=(o20->x)+24))&&((mouse_world.y>=(o20->y)-24)&&(mouse_world.y<=(o20->y)+24)))
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=14440-62-54-54)&&(clock1.getElapsedTime().asMilliseconds()<=14440-62-54))&&o19!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=14440+62+54)&&(clock1.getElapsedTime().asMilliseconds()<=14440+62+54+54))&&o19!=nullptr))//50
                             {
+                                hit50.setPosition(X19,Y19);
+                                o19=nullptr;
+                                delete o19;
+                                sc=sc+(50*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit50);
+                                app.display();
+                            }
+                            }
+                            if(o20!=nullptr&&(((mouse_world.x>=(o20->x)-24)&&(mouse_world.x<=(o20->x)+24))&&((mouse_world.y>=(o20->y)-24)&&(mouse_world.y<=(o20->y)+24))))
+                            {
+                            if(((clock1.getElapsedTime().asMilliseconds()>=14863-62)&&(clock1.getElapsedTime().asMilliseconds()<=14863+62))&&o20!=nullptr)//300
+                            {
+                                hit300.setPosition(X20,Y20);
+                                o20=nullptr;
+                                delete o20;
+                                sc=sc+(300*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit300);
+                                app.display();
+                            }
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=14863-62-54)&&(clock1.getElapsedTime().asMilliseconds()<=14863-62))&&o20!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=14863+62)&&(clock1.getElapsedTime().asMilliseconds()<=14863+62+54))&&o20!=nullptr))//100
+                            {
+                                hit100.setPosition(X20,Y20);
                                 o20=nullptr;
                                 delete o20;
                                 sc=sc+(100*cb);
                                 hplife(HP);
                                 cb++;
+                                app.draw(hit100);
+                                app.display();
                             }
-                            if(((clock1.getElapsedTime().asMilliseconds()>=15708-1440)&&(clock1.getElapsedTime().asMilliseconds()<=15708))&&o21!=nullptr)
-                            if(((mouse_world.x>=(o21->x)-24)&&(mouse_world.x<=(o21->x)+24))&&((mouse_world.y>=(o21->y)-24)&&(mouse_world.y<=(o21->y)+24)))
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=14863-62-54-54)&&(clock1.getElapsedTime().asMilliseconds()<=14863-62-54))&&o20!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=14863+62+54)&&(clock1.getElapsedTime().asMilliseconds()<=14863+62+54+54))&&o20!=nullptr))//50
                             {
+                                hit50.setPosition(X20,Y20);
+                                o20=nullptr;
+                                delete o20;
+                                sc=sc+(50*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit50);
+                                app.display();
+                            }
+                            }
+                            if(o21!=nullptr&&(((mouse_world.x>=(o21->x)-24)&&(mouse_world.x<=(o21->x)+24))&&((mouse_world.y>=(o21->y)-24)&&(mouse_world.y<=(o21->y)+24))))
+                            {
+                            if(((clock1.getElapsedTime().asMilliseconds()>=15708-62)&&(clock1.getElapsedTime().asMilliseconds()<=15708+62))&&o21!=nullptr)//300
+                            {
+                                hit300.setPosition(X21,Y21);
+                                o21=nullptr;
+                                delete o21;
+                                sc=sc+(300*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit300);
+                                app.display();
+                            }
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=15708-62-54)&&(clock1.getElapsedTime().asMilliseconds()<=15708-62))&&o21!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=15708+62)&&(clock1.getElapsedTime().asMilliseconds()<=15708+62+54))&&o21!=nullptr))//100
+                            {
+                                hit100.setPosition(X21,Y21);
                                 o21=nullptr;
                                 delete o21;
                                 sc=sc+(100*cb);
                                 hplife(HP);
                                 cb++;
+                                app.draw(hit100);
+                                app.display();
                             }
-                            if(((clock1.getElapsedTime().asMilliseconds()>=16553-1440)&&(clock1.getElapsedTime().asMilliseconds()<=16553))&&o22!=nullptr)
-                            if(((mouse_world.x>=(o22->x)-24)&&(mouse_world.x<=(o22->x)+24))&&((mouse_world.y>=(o22->y)-24)&&(mouse_world.y<=(o22->y)+24)))
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=15708-62-54-54)&&(clock1.getElapsedTime().asMilliseconds()<=15708-62-54))&&o21!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=15708+62+54)&&(clock1.getElapsedTime().asMilliseconds()<=15708+62+54+54))&&o21!=nullptr))//50
                             {
+                                hit50.setPosition(X21,Y21);
+                                o21=nullptr;
+                                delete o21;
+                                sc=sc+(50*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit50);
+                                app.display();
+                            }
+                            }
+                            if(o22!=nullptr&&(((mouse_world.x>=(o22->x)-24)&&(mouse_world.x<=(o22->x)+24))&&((mouse_world.y>=(o22->y)-24)&&(mouse_world.y<=(o22->y)+24))))
+                            {
+                            if(((clock1.getElapsedTime().asMilliseconds()>=16553-62)&&(clock1.getElapsedTime().asMilliseconds()<=16553+62))&&o22!=nullptr)//300
+                            {
+                                hit300.setPosition(X22,Y22);
+                                o22=nullptr;
+                                delete o22;
+                                sc=sc+(300*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit300);
+                                app.display();
+                            }
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=16553-62-54)&&(clock1.getElapsedTime().asMilliseconds()<=16553-62))&&o22!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=16553+62)&&(clock1.getElapsedTime().asMilliseconds()<=16553+62+54))&&o22!=nullptr))//100
+                            {
+                                hit100.setPosition(X22,Y22);
                                 o22=nullptr;
                                 delete o22;
                                 sc=sc+(100*cb);
                                 hplife(HP);
                                 cb++;
+                                app.draw(hit100);
+                                app.display();
                             }
-                            if(((clock1.getElapsedTime().asMilliseconds()>=17821-1440)&&(clock1.getElapsedTime().asMilliseconds()<=17821))&&o23!=nullptr)
-                            if(((mouse_world.x>=(o23->x)-24)&&(mouse_world.x<=(o23->x)+24))&&((mouse_world.y>=(o23->y)-24)&&(mouse_world.y<=(o23->y)+24)))
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=16553-62-54-54)&&(clock1.getElapsedTime().asMilliseconds()<=16553-62-54))&&o22!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=16553+62+54)&&(clock1.getElapsedTime().asMilliseconds()<=16553+62+54+54))&&o22!=nullptr))//50
                             {
+                                hit50.setPosition(X22,Y22);
+                                o22=nullptr;
+                                delete o22;
+                                sc=sc+(50*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit50);
+                                app.display();
+                            }
+                            }
+                            if(o23!=nullptr&&(((mouse_world.x>=(o23->x)-24)&&(mouse_world.x<=(o23->x)+24))&&((mouse_world.y>=(o23->y)-24)&&(mouse_world.y<=(o23->y)+24))))
+                            {
+                            if(((clock1.getElapsedTime().asMilliseconds()>=17821-62)&&(clock1.getElapsedTime().asMilliseconds()<=17821+62))&&o23!=nullptr)//300
+                            {
+                                hit300.setPosition(X23,Y23);
+                                o23=nullptr;
+                                delete o23;
+                                sc=sc+(300*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit300);
+                                app.display();
+                            }
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=17821-62-54)&&(clock1.getElapsedTime().asMilliseconds()<=17821-62))&&o23!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=17821+62)&&(clock1.getElapsedTime().asMilliseconds()<=17821+62+54))&&o23!=nullptr))//100
+                            {
+                                hit100.setPosition(X23,Y23);
                                 o23=nullptr;
                                 delete o23;
                                 sc=sc+(100*cb);
                                 hplife(HP);
                                 cb++;
+                                app.draw(hit100);
+                                app.display();
                             }
-                            if(((clock1.getElapsedTime().asMilliseconds()>=18243-1440)&&(clock1.getElapsedTime().asMilliseconds()<=18243))&&o24!=nullptr)
-                            if(((mouse_world.x>=(o24->x)-24)&&(mouse_world.x<=(o24->x)+24))&&((mouse_world.y>=(o24->y)-24)&&(mouse_world.y<=(o24->y)+24)))
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=17821-62-54-54)&&(clock1.getElapsedTime().asMilliseconds()<=17821-62-54))&&o23!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=17821+62+54)&&(clock1.getElapsedTime().asMilliseconds()<=17821+62+54+54))&&o23!=nullptr))//50
                             {
+                                hit50.setPosition(X23,Y23);
+                                o23=nullptr;
+                                delete o23;
+                                sc=sc+(50*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit50);
+                                app.display();
+                            }
+                            }
+                            if(o24!=nullptr&&(((mouse_world.x>=(o24->x)-24)&&(mouse_world.x<=(o24->x)+24))&&((mouse_world.y>=(o24->y)-24)&&(mouse_world.y<=(o24->y)+24))))
+                            {
+                            if(((clock1.getElapsedTime().asMilliseconds()>=18243-62)&&(clock1.getElapsedTime().asMilliseconds()<=18243+62))&&o24!=nullptr)//300
+                            {
+                                hit300.setPosition(X24,Y24);
+                                o24=nullptr;
+                                delete o24;
+                                sc=sc+(300*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit300);
+                                app.display();
+                            }
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=18243-62-54)&&(clock1.getElapsedTime().asMilliseconds()<=18243-62))&&o24!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=18243+62)&&(clock1.getElapsedTime().asMilliseconds()<=18243+62+54))&&o24!=nullptr))//100
+                            {
+                                hit100.setPosition(X24,Y24);
                                 o24=nullptr;
                                 delete o24;
                                 sc=sc+(100*cb);
                                 hplife(HP);
                                 cb++;
+                                app.draw(hit100);
+                                app.display();
                             }
-                            if(((clock1.getElapsedTime().asMilliseconds()>=19088-1440)&&(clock1.getElapsedTime().asMilliseconds()<=19088))&&o25!=nullptr)
-                            if(((mouse_world.x>=(o25->x)-24)&&(mouse_world.x<=(o25->x)+24))&&((mouse_world.y>=(o25->y)-24)&&(mouse_world.y<=(o25->y)+24)))
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=18243-62-54-54)&&(clock1.getElapsedTime().asMilliseconds()<=18243-62-54))&&o24!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=18243+62+54)&&(clock1.getElapsedTime().asMilliseconds()<=18243+62+54+54))&&o24!=nullptr))//50
                             {
+                                hit50.setPosition(X24,Y24);
+                                o24=nullptr;
+                                delete o24;
+                                sc=sc+(50*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit50);
+                                app.display();
+                            }
+                            }
+                            if(o25!=nullptr&&(((mouse_world.x>=(o25->x)-24)&&(mouse_world.x<=(o25->x)+24))&&((mouse_world.y>=(o25->y)-24)&&(mouse_world.y<=(o25->y)+24))))
+                            {
+                            if(((clock1.getElapsedTime().asMilliseconds()>=19088-62)&&(clock1.getElapsedTime().asMilliseconds()<=19088+62))&&o25!=nullptr)//300
+                            {
+                                hit300.setPosition(X25,Y25);
+                                o25=nullptr;
+                                delete o25;
+                                sc=sc+(300*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit300);
+                                app.display();
+                            }
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=19088-62-54)&&(clock1.getElapsedTime().asMilliseconds()<=19088-62))&&o25!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=19088+62)&&(clock1.getElapsedTime().asMilliseconds()<=19088+62+54))&&o25!=nullptr))//100
+                            {
+                                hit100.setPosition(X25,Y25);
                                 o25=nullptr;
                                 delete o25;
                                 sc=sc+(100*cb);
                                 hplife(HP);
                                 cb++;
+                                app.draw(hit100);
+                                app.display();
                             }
-                            if(((clock1.getElapsedTime().asMilliseconds()>=19933-1440)&&(clock1.getElapsedTime().asMilliseconds()<=19933))&&o26!=nullptr)
-                            if(((mouse_world.x>=(o26->x)-24)&&(mouse_world.x<=(o26->x)+24))&&((mouse_world.y>=(o26->y)-24)&&(mouse_world.y<=(o26->y)+24)))
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=19088-62-54-54)&&(clock1.getElapsedTime().asMilliseconds()<=19088-62-54))&&o25!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=19088+62+54)&&(clock1.getElapsedTime().asMilliseconds()<=19088+62+54+54))&&o25!=nullptr))//50
                             {
+                                hit50.setPosition(X25,Y25);
+                                o25=nullptr;
+                                delete o25;
+                                sc=sc+(50*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit50);
+                                app.display();
+                            }
+                            }
+                            if(o26!=nullptr&&(((mouse_world.x>=(o26->x)-24)&&(mouse_world.x<=(o26->x)+24))&&((mouse_world.y>=(o26->y)-24)&&(mouse_world.y<=(o26->y)+24))))
+                            {
+                            if(((clock1.getElapsedTime().asMilliseconds()>=19933-62)&&(clock1.getElapsedTime().asMilliseconds()<=19933+62))&&o26!=nullptr)//300
+                            {
+                                hit300.setPosition(X26,Y26);
+                                o26=nullptr;
+                                delete o26;
+                                sc=sc+(300*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit300);
+                                app.display();
+                            }
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=19933-62-54)&&(clock1.getElapsedTime().asMilliseconds()<=19933-62))&&o26!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=19933+62)&&(clock1.getElapsedTime().asMilliseconds()<=19933+62+54))&&o26!=nullptr))//100
+                            {
+                                hit100.setPosition(X26,Y26);
                                 o26=nullptr;
                                 delete o26;
                                 sc=sc+(100*cb);
                                 hplife(HP);
                                 cb++;
+                                app.draw(hit100);
+                                app.display();
                             }
-                            if(((clock1.getElapsedTime().asMilliseconds()>=21201-1440)&&(clock1.getElapsedTime().asMilliseconds()<=21201))&&o27!=nullptr)
-                            if(((mouse_world.x>=(o27->x)-24)&&(mouse_world.x<=(o27->x)+24))&&((mouse_world.y>=(o27->y)-24)&&(mouse_world.y<=(o27->y)+24)))
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=19933-62-54-54)&&(clock1.getElapsedTime().asMilliseconds()<=19933-62-54))&&o26!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=19933+62+54)&&(clock1.getElapsedTime().asMilliseconds()<=19933+62+54+54))&&o26!=nullptr))//50
                             {
+                                hit50.setPosition(X26,Y26);
+                                o26=nullptr;
+                                delete o26;
+                                sc=sc+(50*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit50);
+                                app.display();
+                            }
+                            }
+                            if(o27!=nullptr&&(((mouse_world.x>=(o27->x)-24)&&(mouse_world.x<=(o27->x)+24))&&((mouse_world.y>=(o27->y)-24)&&(mouse_world.y<=(o27->y)+24))))
+                            {
+                            if(((clock1.getElapsedTime().asMilliseconds()>=21201-62)&&(clock1.getElapsedTime().asMilliseconds()<=21201+62))&&o27!=nullptr)//300
+                            {
+                                hit300.setPosition(X27,Y27);
+                                o27=nullptr;
+                                delete o27;
+                                sc=sc+(300*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit300);
+                                app.display();
+                            }
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=21201-62-54)&&(clock1.getElapsedTime().asMilliseconds()<=21201-62))&&o27!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=21201+62)&&(clock1.getElapsedTime().asMilliseconds()<=21201+62+54))&&o27!=nullptr))//100
+                            {
+                                hit100.setPosition(X27,Y27);
                                 o27=nullptr;
                                 delete o27;
                                 sc=sc+(100*cb);
                                 hplife(HP);
                                 cb++;
+                                app.draw(hit100);
+                                app.display();
                             }
-                            if(((clock1.getElapsedTime().asMilliseconds()>=21623-1440)&&(clock1.getElapsedTime().asMilliseconds()<=21623))&&o28!=nullptr)
-                            if(((mouse_world.x>=(o28->x)-24)&&(mouse_world.x<=(o28->x)+24))&&((mouse_world.y>=(o28->y)-24)&&(mouse_world.y<=(o28->y)+24)))
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=21201-62-54-54)&&(clock1.getElapsedTime().asMilliseconds()<=21201-62-54))&&o27!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=21201+62+54)&&(clock1.getElapsedTime().asMilliseconds()<=21201+62+54+54))&&o27!=nullptr))//50
                             {
+                                hit50.setPosition(X27,Y27);
+                                o27=nullptr;
+                                delete o27;
+                                sc=sc+(50*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit50);
+                                app.display();
+                            }
+                            }
+                            if(o28!=nullptr&&(((mouse_world.x>=(o28->x)-24)&&(mouse_world.x<=(o28->x)+24))&&((mouse_world.y>=(o28->y)-24)&&(mouse_world.y<=(o28->y)+24))))
+                            {
+                            if(((clock1.getElapsedTime().asMilliseconds()>=21623-62)&&(clock1.getElapsedTime().asMilliseconds()<=21623+62))&&o28!=nullptr)//300
+                            {
+                                hit300.setPosition(X28,Y28);
+                                o28=nullptr;
+                                delete o28;
+                                sc=sc+(300*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit300);
+                                app.display();
+                            }
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=21623-62-54)&&(clock1.getElapsedTime().asMilliseconds()<=21623-62))&&o28!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=21623+62)&&(clock1.getElapsedTime().asMilliseconds()<=21623+62+54))&&o28!=nullptr))//100
+                            {
+                                hit100.setPosition(X28,Y28);
                                 o28=nullptr;
                                 delete o28;
                                 sc=sc+(100*cb);
                                 hplife(HP);
                                 cb++;
+                                app.draw(hit100);
+                                app.display();
                             }
-                            if(((clock1.getElapsedTime().asMilliseconds()>=22468-1440)&&(clock1.getElapsedTime().asMilliseconds()<=22468))&&o29!=nullptr)
-                            if(((mouse_world.x>=(o29->x)-24)&&(mouse_world.x<=(o29->x)+24))&&((mouse_world.y>=(o29->y)-24)&&(mouse_world.y<=(o29->y)+24)))
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=21623-62-54-54)&&(clock1.getElapsedTime().asMilliseconds()<=21623-62-54))&&o28!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=21623+62+54)&&(clock1.getElapsedTime().asMilliseconds()<=21623+62+54+54))&&o28!=nullptr))//50
                             {
+                                hit50.setPosition(X28,Y28);
+                                o28=nullptr;
+                                delete o28;
+                                sc=sc+(50*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit50);
+                                app.display();
+                            }
+                            }
+                            if(o29!=nullptr&&(((mouse_world.x>=(o29->x)-24)&&(mouse_world.x<=(o29->x)+24))&&((mouse_world.y>=(o29->y)-24)&&(mouse_world.y<=(o29->y)+24))))
+                            {
+                            if(((clock1.getElapsedTime().asMilliseconds()>=22468-62)&&(clock1.getElapsedTime().asMilliseconds()<=22468+62))&&o29!=nullptr)//300
+                            {
+                                hit300.setPosition(X29,Y29);
+                                o29=nullptr;
+                                delete o29;
+                                sc=sc+(300*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit300);
+                                app.display();
+                            }
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=22468-62-54)&&(clock1.getElapsedTime().asMilliseconds()<=22468-62))&&o29!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=22468+62)&&(clock1.getElapsedTime().asMilliseconds()<=22468+62+54))&&o29!=nullptr))//100
+                            {
+                                hit100.setPosition(X29,Y29);
                                 o29=nullptr;
                                 delete o29;
                                 sc=sc+(100*cb);
                                 hplife(HP);
                                 cb++;
+                                app.draw(hit100);
+                                app.display();
                             }
-                            if(((clock1.getElapsedTime().asMilliseconds()>=23102-1440)&&(clock1.getElapsedTime().asMilliseconds()<=23102))&&o30!=nullptr)
-                            if(((mouse_world.x>=(o30->x)-24)&&(mouse_world.x<=(o30->x)+24))&&((mouse_world.y>=(o30->y)-24)&&(mouse_world.y<=(o30->y)+24)))
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=22468-62-54-54)&&(clock1.getElapsedTime().asMilliseconds()<=22468-62-54))&&o29!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=22468+62+54)&&(clock1.getElapsedTime().asMilliseconds()<=22468+62+54+54))&&o29!=nullptr))//50
                             {
+                                hit50.setPosition(X29,Y29);
+                                o29=nullptr;
+                                delete o29;
+                                sc=sc+(50*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit50);
+                                app.display();
+                            }
+                            }
+                            if(o30!=nullptr&&(((mouse_world.x>=(o30->x)-24)&&(mouse_world.x<=(o30->x)+24))&&((mouse_world.y>=(o30->y)-24)&&(mouse_world.y<=(o30->y)+24))))
+                            {
+                            if(((clock1.getElapsedTime().asMilliseconds()>=23102-62)&&(clock1.getElapsedTime().asMilliseconds()<=23102+62))&&o30!=nullptr)//300
+                            {
+                                hit300.setPosition(X30,Y30);
+                                o30=nullptr;
+                                delete o30;
+                                sc=sc+(300*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit300);
+                                app.display();
+                            }
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=23102-62-54)&&(clock1.getElapsedTime().asMilliseconds()<=23102-62))&&o30!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=23102+62)&&(clock1.getElapsedTime().asMilliseconds()<=23102+62+54))&&o30!=nullptr))//100
+                            {
+                                hit100.setPosition(X30,Y30);
                                 o30=nullptr;
                                 delete o30;
                                 sc=sc+(100*cb);
                                 hplife(HP);
                                 cb++;
+                                app.draw(hit100);
+                                app.display();
                             }
-                            if(((clock1.getElapsedTime().asMilliseconds()>=24159-1440)&&(clock1.getElapsedTime().asMilliseconds()<=24159))&&o31!=nullptr)
-                            if(((mouse_world.x>=(o31->x)-24)&&(mouse_world.x<=(o31->x)+24))&&((mouse_world.y>=(o31->y)-24)&&(mouse_world.y<=(o31->y)+24)))
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=23102-62-54-54)&&(clock1.getElapsedTime().asMilliseconds()<=23102-62-54))&&o30!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=23102+62+54)&&(clock1.getElapsedTime().asMilliseconds()<=23102+62+54+54))&&o30!=nullptr))//50
                             {
+                                hit50.setPosition(X30,Y30);
+                                o30=nullptr;
+                                delete o30;
+                                sc=sc+(50*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit50);
+                                app.display();
+                            }
+                            }
+                            if(o31!=nullptr&&(((mouse_world.x>=(o31->x)-24)&&(mouse_world.x<=(o31->x)+24))&&((mouse_world.y>=(o31->y)-24)&&(mouse_world.y<=(o31->y)+24))))
+                            {
+                            if(((clock1.getElapsedTime().asMilliseconds()>=24159-62)&&(clock1.getElapsedTime().asMilliseconds()<=24159+62))&&o31!=nullptr)//300
+                            {
+                                hit300.setPosition(X31,Y31);
+                                o31=nullptr;
+                                delete o31;
+                                sc=sc+(300*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit300);
+                                app.display();
+                            }
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=24159-62-54)&&(clock1.getElapsedTime().asMilliseconds()<=24159-62))&&o31!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=24159+62)&&(clock1.getElapsedTime().asMilliseconds()<=24159+62+54))&&o31!=nullptr))//100
+                            {
+                                hit100.setPosition(X31,Y31);
                                 o31=nullptr;
                                 delete o31;
                                 sc=sc+(100*cb);
                                 hplife(HP);
                                 cb++;
+                                app.draw(hit100);
+                                app.display();
                             }
-                            if(((clock1.getElapsedTime().asMilliseconds()>=24792-1440)&&(clock1.getElapsedTime().asMilliseconds()<=24792))&&o32!=nullptr)
-                            if(((mouse_world.x>=(o32->x)-24)&&(mouse_world.x<=(o32->x)+24))&&((mouse_world.y>=(o32->y)-24)&&(mouse_world.y<=(o32->y)+24)))
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=24159-62-54-54)&&(clock1.getElapsedTime().asMilliseconds()<=24159-62-54))&&o31!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=24159+62+54)&&(clock1.getElapsedTime().asMilliseconds()<=24159+62+54+54))&&o31!=nullptr))//50
                             {
+                                hit50.setPosition(X31,Y31);
+                                o31=nullptr;
+                                delete o31;
+                                sc=sc+(50*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit50);
+                                app.display();
+                            }
+                            }
+                            if(o32!=nullptr&&(((mouse_world.x>=(o32->x)-24)&&(mouse_world.x<=(o32->x)+24))&&((mouse_world.y>=(o32->y)-24)&&(mouse_world.y<=(o32->y)+24))))
+                            {
+                            if(((clock1.getElapsedTime().asMilliseconds()>=24792-62)&&(clock1.getElapsedTime().asMilliseconds()<=24792+62))&&o32!=nullptr)//300
+                            {
+                                hit300.setPosition(X32,Y32);
+                                o32=nullptr;
+                                delete o32;
+                                sc=sc+(300*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit300);
+                                app.display();
+                            }
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=24792-62-54)&&(clock1.getElapsedTime().asMilliseconds()<=24792-62))&&o32!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=24792+62)&&(clock1.getElapsedTime().asMilliseconds()<=24792+62+54))&&o32!=nullptr))//100
+                            {
+                                hit100.setPosition(X32,Y32);
                                 o32=nullptr;
                                 delete o32;
                                 sc=sc+(100*cb);
                                 hplife(HP);
                                 cb++;
+                                app.draw(hit100);
+                                app.display();
                             }
-                            if(((clock1.getElapsedTime().asMilliseconds()>=25849-1440)&&(clock1.getElapsedTime().asMilliseconds()<=25849))&&o33!=nullptr)
-                            if(((mouse_world.x>=(o33->x)-24)&&(mouse_world.x<=(o33->x)+24))&&((mouse_world.y>=(o33->y)-24)&&(mouse_world.y<=(o33->y)+24)))
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=24792-62-54-54)&&(clock1.getElapsedTime().asMilliseconds()<=24792-62-54))&&o32!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=24792+62+54)&&(clock1.getElapsedTime().asMilliseconds()<=24792+62+54+54))&&o32!=nullptr))//50
                             {
+                                hit50.setPosition(X32,Y32);
+                                o32=nullptr;
+                                delete o32;
+                                sc=sc+(50*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit50);
+                                app.display();
+                            }
+                            }
+                            if(o33!=nullptr&&(((mouse_world.x>=(o33->x)-24)&&(mouse_world.x<=(o33->x)+24))&&((mouse_world.y>=(o33->y)-24)&&(mouse_world.y<=(o33->y)+24))))
+                            {
+                            if(((clock1.getElapsedTime().asMilliseconds()>=25849-62)&&(clock1.getElapsedTime().asMilliseconds()<=25849+62))&&o33!=nullptr)//300
+                            {
+                                hit300.setPosition(X33,Y33);
+                                o33=nullptr;
+                                delete o33;
+                                sc=sc+(300*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit300);
+                                app.display();
+                            }
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=25849-62-54)&&(clock1.getElapsedTime().asMilliseconds()<=25849-62))&&o33!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=25849+62)&&(clock1.getElapsedTime().asMilliseconds()<=25849+62+54))&&o33!=nullptr))//100
+                            {
+                                hit100.setPosition(X33,Y33);
                                 o33=nullptr;
                                 delete o33;
                                 sc=sc+(100*cb);
                                 hplife(HP);
                                 cb++;
+                                app.draw(hit100);
+                                app.display();
                             }
-                            if(((clock1.getElapsedTime().asMilliseconds()>=26482-1440)&&(clock1.getElapsedTime().asMilliseconds()<=26482))&&o34!=nullptr)
-                            if(((mouse_world.x>=(o34->x)-24)&&(mouse_world.x<=(o34->x)+24))&&((mouse_world.y>=(o34->y)-24)&&(mouse_world.y<=(o34->y)+24)))
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=25849-62-54-54)&&(clock1.getElapsedTime().asMilliseconds()<=25849-62-54))&&o33!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=25849+62+54)&&(clock1.getElapsedTime().asMilliseconds()<=25849+62+54+54))&&o33!=nullptr))//50
                             {
+                                hit50.setPosition(X33,Y33);
+                                o33=nullptr;
+                                delete o33;
+                                sc=sc+(50*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit50);
+                                app.display();
+                            }
+                            }
+                            if(o34!=nullptr&&(((mouse_world.x>=(o34->x)-24)&&(mouse_world.x<=(o34->x)+24))&&((mouse_world.y>=(o34->y)-24)&&(mouse_world.y<=(o34->y)+24))))
+                            {
+                            if(((clock1.getElapsedTime().asMilliseconds()>=26482-62)&&(clock1.getElapsedTime().asMilliseconds()<=26482+62))&&o34!=nullptr)//300
+                            {
+                                hit300.setPosition(X34,Y34);
+                                o34=nullptr;
+                                delete o34;
+                                sc=sc+(300*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit300);
+                                app.display();
+                            }
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=26482-62-54)&&(clock1.getElapsedTime().asMilliseconds()<=26482-62))&&o34!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=26482+62)&&(clock1.getElapsedTime().asMilliseconds()<=26482+62+54))&&o34!=nullptr))//100
+                            {
+                                hit100.setPosition(X34,Y34);
                                 o34=nullptr;
                                 delete o34;
                                 sc=sc+(100*cb);
                                 hplife(HP);
                                 cb++;
+                                app.draw(hit100);
+                                app.display();
                             }
-                            if(((clock1.getElapsedTime().asMilliseconds()>=27539-1440)&&(clock1.getElapsedTime().asMilliseconds()<=27539))&&o35!=nullptr)
-                            if(((mouse_world.x>=(o35->x)-24)&&(mouse_world.x<=(o35->x)+24))&&((mouse_world.y>=(o35->y)-24)&&(mouse_world.y<=(o35->y)+24)))
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=26482-62-54-54)&&(clock1.getElapsedTime().asMilliseconds()<=26482-62-54))&&o34!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=26482+62+54)&&(clock1.getElapsedTime().asMilliseconds()<=26482+62+54+54))&&o34!=nullptr))//50
                             {
+                                hit50.setPosition(X34,Y34);
+                                o34=nullptr;
+                                delete o34;
+                                sc=sc+(50*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit50);
+                                app.display();
+                            }
+                            }
+                            if(o35!=nullptr&&(((mouse_world.x>=(o35->x)-24)&&(mouse_world.x<=(o35->x)+24))&&((mouse_world.y>=(o35->y)-24)&&(mouse_world.y<=(o35->y)+24))))
+                            {
+                            if(((clock1.getElapsedTime().asMilliseconds()>=27539-62)&&(clock1.getElapsedTime().asMilliseconds()<=27539+62))&&o35!=nullptr)//300
+                            {
+                                hit300.setPosition(X35,Y35);
+                                o35=nullptr;
+                                delete o35;
+                                sc=sc+(300*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit300);
+                                app.display();
+                            }
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=27539-62-54)&&(clock1.getElapsedTime().asMilliseconds()<=27539-62))&&o35!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=27539+62)&&(clock1.getElapsedTime().asMilliseconds()<=27539+62+54))&&o35!=nullptr))//100
+                            {
+                                hit100.setPosition(X35,Y35);
                                 o35=nullptr;
                                 delete o35;
                                 sc=sc+(100*cb);
                                 hplife(HP);
                                 cb++;
+                                app.draw(hit100);
+                                app.display();
                             }
-                            if(((clock1.getElapsedTime().asMilliseconds()>=28384-1440)&&(clock1.getElapsedTime().asMilliseconds()<=28384))&&o36!=nullptr)
-                            if(((mouse_world.x>=(o36->x)-24)&&(mouse_world.x<=(o36->x)+24))&&((mouse_world.y>=(o36->y)-24)&&(mouse_world.y<=(o36->y)+24)))
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=27539-62-54-54)&&(clock1.getElapsedTime().asMilliseconds()<=27539-62-54))&&o35!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=27539+62+54)&&(clock1.getElapsedTime().asMilliseconds()<=27539+62+54+54))&&o35!=nullptr))//50
                             {
+                                hit50.setPosition(X35,Y35);
+                                o35=nullptr;
+                                delete o35;
+                                sc=sc+(50*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit50);
+                                app.display();
+                            }
+                            }
+                            if(o36!=nullptr&&(((mouse_world.x>=(o36->x)-24)&&(mouse_world.x<=(o36->x)+24))&&((mouse_world.y>=(o36->y)-24)&&(mouse_world.y<=(o36->y)+24))))
+                            {
+                            if(((clock1.getElapsedTime().asMilliseconds()>=28384-62)&&(clock1.getElapsedTime().asMilliseconds()<=28384+62))&&o36!=nullptr)//300
+                            {
+                                hit300.setPosition(X36,Y36);
+                                o36=nullptr;
+                                delete o36;
+                                sc=sc+(300*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit300);
+                                app.display();
+                            }
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=28384-62-54)&&(clock1.getElapsedTime().asMilliseconds()<=28384-62))&&o36!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=28384+62)&&(clock1.getElapsedTime().asMilliseconds()<=28384+62+54))&&o36!=nullptr))//100
+                            {
+                                hit100.setPosition(X36,Y36);
                                 o36=nullptr;
                                 delete o36;
                                 sc=sc+(100*cb);
                                 hplife(HP);
                                 cb++;
+                                app.draw(hit100);
+                                app.display();
                             }
-                            if(((clock1.getElapsedTime().asMilliseconds()>=28490-1440)&&(clock1.getElapsedTime().asMilliseconds()<=28490))&&o37!=nullptr)
-                            if(((mouse_world.x>=(o37->x)-24)&&(mouse_world.x<=(o37->x)+24))&&((mouse_world.y>=(o37->y)-24)&&(mouse_world.y<=(o37->y)+24)))
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=28384-62-54-54)&&(clock1.getElapsedTime().asMilliseconds()<=28384-62-54))&&o36!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=28384+62+54)&&(clock1.getElapsedTime().asMilliseconds()<=28384+62+54+54))&&o36!=nullptr))//50
                             {
+                                hit50.setPosition(X36,Y36);
+                                o36=nullptr;
+                                delete o36;
+                                sc=sc+(50*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit50);
+                                app.display();
+                            }
+                            }
+                            if(o37!=nullptr&&(((mouse_world.x>=(o37->x)-24)&&(mouse_world.x<=(o37->x)+24))&&((mouse_world.y>=(o37->y)-24)&&(mouse_world.y<=(o37->y)+24))))
+                            {
+                            if(((clock1.getElapsedTime().asMilliseconds()>=28490-62)&&(clock1.getElapsedTime().asMilliseconds()<=28490+62))&&o37!=nullptr)//300
+                            {
+                                hit300.setPosition(X37,Y37);
+                                o37=nullptr;
+                                delete o37;
+                                sc=sc+(300*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit300);
+                                app.display();
+                            }
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=28490-62-54)&&(clock1.getElapsedTime().asMilliseconds()<=28490-62))&&o37!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=28490+62)&&(clock1.getElapsedTime().asMilliseconds()<=28490+62+54))&&o37!=nullptr))//100
+                            {
+                                hit100.setPosition(X37,Y37);
                                 o37=nullptr;
                                 delete o37;
                                 sc=sc+(100*cb);
                                 hplife(HP);
                                 cb++;
+                                app.draw(hit100);
+                                app.display();
                             }
-
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=28490-62-54-54)&&(clock1.getElapsedTime().asMilliseconds()<=28490-62-54))&&o37!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=28490+62+54)&&(clock1.getElapsedTime().asMilliseconds()<=28490+62+54+54))&&o37!=nullptr))//50
+                            {
+                                hit50.setPosition(X37,Y37);
+                                o37=nullptr;
+                                delete o37;
+                                sc=sc+(50*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit50);
+                                app.display();
+                            }
+                            }
                         }
 
             if (event.type == sf::Event::KeyReleased)
+            if (event.key.code == Keyboard::Escape) return true;
             if (event.key.code == sf::Keyboard::R) Gameplay(app,music);//Рестарт
             else if ((event.key.code == sf::Keyboard::Z)||(event.key.code == sf::Keyboard::X)||(event.key.code == sf::Keyboard::Left)||(event.key.code == sf::Keyboard::Down))
+                        {
+                            if(o2!=nullptr&&(((mouse_world.x>=(o2->x)-24)&&(mouse_world.x<=(o2->x)+24))&&((mouse_world.y>=(o2->y)-24)&&(mouse_world.y<=(o2->y)+24))))
+
+                            if(((clock1.getElapsedTime().asMilliseconds()>=285-62)&&(clock1.getElapsedTime().asMilliseconds()<=1342+62))&&o2!=nullptr)//300
                             {
-                                if(((clock1.getElapsedTime().asMilliseconds()>=0)&&(clock1.getElapsedTime().asMilliseconds()<=285))&&o2!=nullptr)
-                            if(((mouse_world.x>=(o2->x)-24)&&(mouse_world.x<=(o2->x)+24))&&((mouse_world.y>=(o2->y)-24)&&(mouse_world.y<=(o2->y)+24)))
+                                hit300.setPosition(X3,Y3);
+                                o2=nullptr;
+                                delete o2;
+                                sc=sc+(300*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit300);
+                                app.display();
+                            }
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=285-62-54)&&(clock1.getElapsedTime().asMilliseconds()<=285-62))&&o2!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=285+62)&&(clock1.getElapsedTime().asMilliseconds()<=285+62+54))&&o2!=nullptr))//100
                             {
+                                hit100.setPosition(X3,Y3);
                                 o2=nullptr;
                                 delete o2;
                                 sc=sc+(100*cb);
                                 hplife(HP);
                                 cb++;
+                                app.draw(hit100);
+                                app.display();
                             }
-                            if(((clock1.getElapsedTime().asMilliseconds()>=1342-1440)&&(clock1.getElapsedTime().asMilliseconds()<=1342))&&o3!=nullptr)
-                            if(((mouse_world.x>=(o3->x)-24)&&(mouse_world.x<=(o3->x)+24))&&((mouse_world.y>=(o3->y)-24)&&(mouse_world.y<=(o3->y)+24)))
-
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=1342-62-54-54)&&(clock1.getElapsedTime().asMilliseconds()<=285-62-54))&&o2!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=285+62+54)&&(clock1.getElapsedTime().asMilliseconds()<=285+62+54+54))&&o2!=nullptr))//50
                             {
+                                hit50.setPosition(X3,Y3);
+                                o2=nullptr;
+                                delete o2;
+                                sc=sc+(50*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit50);
+                                app.display();
+                            }
+
+                            if(o3!=nullptr&&(((mouse_world.x>=(o3->x)-24)&&(mouse_world.x<=(o3->x)+24))&&((mouse_world.y>=(o3->y)-24)&&(mouse_world.y<=(o3->y)+24))))
+                            {
+                            if(((clock1.getElapsedTime().asMilliseconds()>=1342-62)&&(clock1.getElapsedTime().asMilliseconds()<=1342+62))&&o3!=nullptr)//300
+                            {
+                                hit300.setPosition(X3,Y3);
+                                o3=nullptr;
+                                delete o3;
+                                sc=sc+(300*cb);
+                                hplife(HP);
+                                cb++;
+
+                                app.draw(hit300);
+                                app.display();
+                            }
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=1342-62-54)&&(clock1.getElapsedTime().asMilliseconds()<=1342-62))&&o3!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=1342+62)&&(clock1.getElapsedTime().asMilliseconds()<=1342+62+54))&&o3!=nullptr))//100
+                            {
+                                hit100.setPosition(X3,Y3);
                                 o3=nullptr;
                                 delete o3;
                                 sc=sc+(100*cb);
                                 hplife(HP);
                                 cb++;
+                                app.draw(hit100);
+                                app.display();
                             }
-                            if(((clock1.getElapsedTime().asMilliseconds()>=1764-1440)&&(clock1.getElapsedTime().asMilliseconds()<=1764))&&o4!=nullptr)
-                            if(((mouse_world.x>=(o4->x)-24)&&(mouse_world.x<=(o4->x)+24))&&((mouse_world.y>=(o4->y)-24)&&(mouse_world.y<=(o4->y)+24)))
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=1342-62-54-54)&&(clock1.getElapsedTime().asMilliseconds()<=1342-62-54))&&o3!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=1342+62+54)&&(clock1.getElapsedTime().asMilliseconds()<=1342+62+54+54))&&o3!=nullptr))//50
                             {
+                                hit50.setPosition(X3,Y3);
+                                o3=nullptr;
+                                delete o3;
+                                sc=sc+(50*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit50);
+                                app.display();
+                            }
+                            }
+                            if(o4!=nullptr&&(((mouse_world.x>=(o4->x)-24)&&(mouse_world.x<=(o4->x)+24))&&((mouse_world.y>=(o4->y)-24)&&(mouse_world.y<=(o4->y)+24))))
+                            {
+                            if(((clock1.getElapsedTime().asMilliseconds()>=1764-62)&&(clock1.getElapsedTime().asMilliseconds()<=1764+62))&&o4!=nullptr)//300
+                            {
+                                hit300.setPosition(X4,Y4);
+                                o4=nullptr;
+                                delete o4;
+                                sc=sc+(300*cb);
+                                hplife(HP);
+                                cb++;
+
+                                app.draw(hit300);
+                                app.display();
+                            }
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=1764-62-54)&&(clock1.getElapsedTime().asMilliseconds()<=1764-62))&&o4!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=1764+62)&&(clock1.getElapsedTime().asMilliseconds()<=1764+62+54))&&o4!=nullptr))//100
+                            {
+                                hit100.setPosition(X4,Y4);
                                 o4=nullptr;
                                 delete o4;
                                 sc=sc+(100*cb);
                                 hplife(HP);
                                 cb++;
+                                app.draw(hit100);
+                                app.display();
                             }
-                            if(((clock1.getElapsedTime().asMilliseconds()>=2609-1440)&&(clock1.getElapsedTime().asMilliseconds()<=2609))&&o5!=nullptr)
-                            if(((mouse_world.x>=(o5->x)-24)&&(mouse_world.x<=(o5->x)+24))&&((mouse_world.y>=(o5->y)-24)&&(mouse_world.y<=(o5->y)+24)))
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=1764-62-54-54)&&(clock1.getElapsedTime().asMilliseconds()<=1764-62-54))&&o4!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=1764+62+54)&&(clock1.getElapsedTime().asMilliseconds()<=1764+62+54+54))&&o4!=nullptr))//50
                             {
+                                hit50.setPosition(X4,Y4);
+                                o4=nullptr;
+                                delete o4;
+                                sc=sc+(50*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit50);
+                                app.display();
+                            }
+                            }
+                            if(o5!=nullptr&&(((mouse_world.x>=(o5->x)-24)&&(mouse_world.x<=(o5->x)+24))&&((mouse_world.y>=(o5->y)-24)&&(mouse_world.y<=(o5->y)+24))))
+                            {
+                            if(((clock1.getElapsedTime().asMilliseconds()>=2609-62)&&(clock1.getElapsedTime().asMilliseconds()<=2609+62))&&o5!=nullptr)//300
+                            {
+                                hit300.setPosition(X5,Y5);
+                                o5=nullptr;
+                                delete o5;
+                                sc=sc+(300*cb);
+                                hplife(HP);
+                                cb++;
+
+                                app.draw(hit300);
+                                app.display();
+                            }
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=2609-62-54)&&(clock1.getElapsedTime().asMilliseconds()<=2609-62))&&o5!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=2609+62)&&(clock1.getElapsedTime().asMilliseconds()<=2609+62+54))&&o5!=nullptr))//100
+                            {
+                                hit100.setPosition(X5,Y5);
                                 o5=nullptr;
                                 delete o5;
                                 sc=sc+(100*cb);
                                 hplife(HP);
                                 cb++;
+                                app.draw(hit100);
+                                app.display();
                             }
-                            if(((clock1.getElapsedTime().asMilliseconds()>=3032-1440)&&(clock1.getElapsedTime().asMilliseconds()<=3032))&&o6!=nullptr)
-                            if(((mouse_world.x>=(o6->x)-24)&&(mouse_world.x<=(o6->x)+24))&&((mouse_world.y>=(o6->y)-24)&&(mouse_world.y<=(o6->y)+24)))
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=2609-62-54-54)&&(clock1.getElapsedTime().asMilliseconds()<=2609-62-54))&&o5!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=2609+62+54)&&(clock1.getElapsedTime().asMilliseconds()<=2609+62+54+54))&&o5!=nullptr))//50
                             {
+                                hit50.setPosition(X5,Y5);
+                                o5=nullptr;
+                                delete o5;
+                                sc=sc+(50*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit50);
+                                app.display();
+                            }
+                            }
+                            if(o6!=nullptr&&(((mouse_world.x>=(o6->x)-24)&&(mouse_world.x<=(o6->x)+24))&&((mouse_world.y>=(o6->y)-24)&&(mouse_world.y<=(o6->y)+24))))
+                            {
+                            if(((clock1.getElapsedTime().asMilliseconds()>=3032-62)&&(clock1.getElapsedTime().asMilliseconds()<=3032+62))&&o6!=nullptr)//300
+                            {
+                                hit300.setPosition(X6,Y6);
+                                o6=nullptr;
+                                delete o6;
+                                sc=sc+(300*cb);
+                                hplife(HP);
+                                cb++;
+
+                                app.draw(hit300);
+                                app.display();
+                            }
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=3032-62-54)&&(clock1.getElapsedTime().asMilliseconds()<=3032-62))&&o6!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=3032+62)&&(clock1.getElapsedTime().asMilliseconds()<=3032+62+54))&&o6!=nullptr))//100
+                            {
+                                hit100.setPosition(X6,Y6);
                                 o6=nullptr;
                                 delete o6;
                                 sc=sc+(100*cb);
                                 hplife(HP);
                                 cb++;
+                                app.draw(hit100);
+                                app.display();
                             }
-                            if(((clock1.getElapsedTime().asMilliseconds()>=3877-1440)&&(clock1.getElapsedTime().asMilliseconds()<=3877))&&o7!=nullptr)
-                            if(((mouse_world.x>=(o7->x)-24)&&(mouse_world.x<=(o7->x)+24))&&((mouse_world.y>=(o7->y)-24)&&(mouse_world.y<=(o7->y)+24)))
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=3032-62-54-54)&&(clock1.getElapsedTime().asMilliseconds()<=3032-62-54))&&o6!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=3032+62+54)&&(clock1.getElapsedTime().asMilliseconds()<=3032+62+54+54))&&o6!=nullptr))//50
                             {
+                                hit50.setPosition(X6,Y6);
+                                o6=nullptr;
+                                delete o6;
+                                sc=sc+(50*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit50);
+                                app.display();
+                            }
+                            }
+                            if(o7!=nullptr&&(((mouse_world.x>=(o7->x)-24)&&(mouse_world.x<=(o7->x)+24))&&((mouse_world.y>=(o7->y)-24)&&(mouse_world.y<=(o7->y)+24))))
+                            {
+                            if(((clock1.getElapsedTime().asMilliseconds()>=3877-62)&&(clock1.getElapsedTime().asMilliseconds()<=3877+62))&&o7!=nullptr)//300
+                            {
+                                hit300.setPosition(X7,Y7);
+                                o7=nullptr;
+                                delete o7;
+                                sc=sc+(300*cb);
+                                hplife(HP);
+                                cb++;
+
+                                app.draw(hit300);
+                                app.display();
+                            }
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=3877-62-54)&&(clock1.getElapsedTime().asMilliseconds()<=3877-62))&&o7!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=3877+62)&&(clock1.getElapsedTime().asMilliseconds()<=3877+62+54))&&o7!=nullptr))//100
+                            {
+                                hit100.setPosition(X7,Y7);
                                 o7=nullptr;
                                 delete o7;
                                 sc=sc+(100*cb);
                                 hplife(HP);
                                 cb++;
+                                app.draw(hit100);
+                                app.display();
                             }
-                            if(((clock1.getElapsedTime().asMilliseconds()>=4722-1440)&&(clock1.getElapsedTime().asMilliseconds()<=4722))&&o8!=nullptr)
-                            if(((mouse_world.x>=(o8->x)-24)&&(mouse_world.x<=(o8->x)+24))&&((mouse_world.y>=(o8->y)-24)&&(mouse_world.y<=(o8->y)+24)))
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=3877-62-54-54)&&(clock1.getElapsedTime().asMilliseconds()<=3877-62-54))&&o7!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=3877+62+54)&&(clock1.getElapsedTime().asMilliseconds()<=3877+62+54+54))&&o7!=nullptr))//50
                             {
+                                hit50.setPosition(X7,Y7);
+                                o7=nullptr;
+                                delete o7;
+                                sc=sc+(50*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit50);
+                                app.display();
+                            }
+                            }
+                            if(o8!=nullptr&&(((mouse_world.x>=(o8->x)-24)&&(mouse_world.x<=(o8->x)+24))&&((mouse_world.y>=(o8->y)-24)&&(mouse_world.y<=(o8->y)+24))))
+                            {
+                            if(((clock1.getElapsedTime().asMilliseconds()>=4722-62)&&(clock1.getElapsedTime().asMilliseconds()<=4722+62))&&o8!=nullptr)//300
+                            {
+                                hit300.setPosition(X8,Y8);
+                                o8=nullptr;
+                                delete o8;
+                                sc=sc+(300*cb);
+                                hplife(HP);
+                                cb++;
+
+                                app.draw(hit300);
+                                app.display();
+                            }
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=4722-62-54)&&(clock1.getElapsedTime().asMilliseconds()<=4722-62))&&o8!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=4722+62)&&(clock1.getElapsedTime().asMilliseconds()<=4722+62+54))&&o8!=nullptr))//100
+                            {
+                                hit100.setPosition(X8,Y8);
                                 o8=nullptr;
                                 delete o8;
                                 sc=sc+(100*cb);
                                 hplife(HP);
                                 cb++;
+                                app.draw(hit100);
+                                app.display();
                             }
-                            if(((clock1.getElapsedTime().asMilliseconds()>=5567-1440)&&(clock1.getElapsedTime().asMilliseconds()<=5567))&&o9!=nullptr)
-                            if(((mouse_world.x>=(o9->x)-24)&&(mouse_world.x<=(o9->x)+24))&&((mouse_world.y>=(o9->y)-24)&&(mouse_world.y<=(o9->y)+24)))
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=4722-62-54-54)&&(clock1.getElapsedTime().asMilliseconds()<=4722-62-54))&&o8!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=4722+62+54)&&(clock1.getElapsedTime().asMilliseconds()<=4722+62+54+54))&&o8!=nullptr))//50
                             {
+                                hit50.setPosition(X8,Y8);
+                                o8=nullptr;
+                                delete o8;
+                                sc=sc+(50*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit50);
+                                app.display();
+                            }
+                            }
+                            if(o9!=nullptr&&(((mouse_world.x>=(o9->x)-24)&&(mouse_world.x<=(o9->x)+24))&&((mouse_world.y>=(o9->y)-24)&&(mouse_world.y<=(o9->y)+24))))
+                            {
+                            if(((clock1.getElapsedTime().asMilliseconds()>=5567-62)&&(clock1.getElapsedTime().asMilliseconds()<=5567+62))&&o9!=nullptr)//300
+                            {
+                                hit300.setPosition(X9,Y9);
+                                o9=nullptr;
+                                delete o9;
+                                sc=sc+(300*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit300);
+                                app.display();
+                            }
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=5567-62-54)&&(clock1.getElapsedTime().asMilliseconds()<=5567-62))&&o9!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=5567+62)&&(clock1.getElapsedTime().asMilliseconds()<=5567+62+54))&&o9!=nullptr))//100
+                            {
+                                hit100.setPosition(X9,Y9);
                                 o9=nullptr;
                                 delete o9;
                                 sc=sc+(100*cb);
                                 hplife(HP);
                                 cb++;
+                                app.draw(hit100);
+                                app.display();
                             }
-                            if(((clock1.getElapsedTime().asMilliseconds()>=6412-1440)&&(clock1.getElapsedTime().asMilliseconds()<=6412))&&o10!=nullptr)
-                            if(((mouse_world.x>=(o10->x)-24)&&(mouse_world.x<=(o10->x)+24))&&((mouse_world.y>=(o10->y)-24)&&(mouse_world.y<=(o10->y)+24)))
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=5567-62-54-54)&&(clock1.getElapsedTime().asMilliseconds()<=5567-62-54))&&o9!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=5567+62+54)&&(clock1.getElapsedTime().asMilliseconds()<=5567+62+54+54))&&o9!=nullptr))//50
                             {
+                                hit50.setPosition(X9,Y9);
+                                o9=nullptr;
+                                delete o9;
+                                sc=sc+(50*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit50);
+                                app.display();
+                            }
+                            }
+                            if(o10!=nullptr&&(((mouse_world.x>=(o10->x)-24)&&(mouse_world.x<=(o10->x)+24))&&((mouse_world.y>=(o10->y)-24)&&(mouse_world.y<=(o10->y)+24))))
+                            {
+                            if(((clock1.getElapsedTime().asMilliseconds()>=6412-62)&&(clock1.getElapsedTime().asMilliseconds()<=6412+62))&&o10!=nullptr)//300
+                            {
+                                hit300.setPosition(X10,Y10);
+                                o10=nullptr;
+                                delete o10;
+                                sc=sc+(300*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit300);
+                                app.display();
+                            }
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=6412-62-54)&&(clock1.getElapsedTime().asMilliseconds()<=6412-62))&&o10!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=6412+62)&&(clock1.getElapsedTime().asMilliseconds()<=6412+62+54))&&o10!=nullptr))//100
+                            {
+                                hit100.setPosition(X10,Y10);
                                 o10=nullptr;
                                 delete o10;
                                 sc=sc+(100*cb);
                                 hplife(HP);
                                 cb++;
+                                app.draw(hit100);
+                                app.display();
                             }
-                            if(((clock1.getElapsedTime().asMilliseconds()>=7680-1440)&&(clock1.getElapsedTime().asMilliseconds()<=7680))&&o11!=nullptr)
-                            if(((mouse_world.x>=(o11->x)-24)&&(mouse_world.x<=(o11->x)+24))&&((mouse_world.y>=(o11->y)-24)&&(mouse_world.y<=(o11->y)+24)))
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=6412-62-54-54)&&(clock1.getElapsedTime().asMilliseconds()<=6412-62-54))&&o10!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=6412+62+54)&&(clock1.getElapsedTime().asMilliseconds()<=6412+62+54+54))&&o10!=nullptr))//50
                             {
+                                hit50.setPosition(X10,Y10);
+                                o10=nullptr;
+                                delete o10;
+                                sc=sc+(50*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit50);
+                                app.display();
+                            }
+                            }
+                            if(o11!=nullptr&&(((mouse_world.x>=(o11->x)-24)&&(mouse_world.x<=(o11->x)+24))&&((mouse_world.y>=(o11->y)-24)&&(mouse_world.y<=(o11->y)+24))))
+                            {
+                            if(((clock1.getElapsedTime().asMilliseconds()>=7680-62)&&(clock1.getElapsedTime().asMilliseconds()<=7680+62))&&o11!=nullptr)//300
+                            {
+                                hit300.setPosition(X11,Y11);
+                                o11=nullptr;
+                                delete o11;
+                                sc=sc+(300*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit300);
+                                app.display();
+                            }
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=7680-62-54)&&(clock1.getElapsedTime().asMilliseconds()<=7680-62))&&o11!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=7680+62)&&(clock1.getElapsedTime().asMilliseconds()<=7680+62+54))&&o11!=nullptr))//100
+                            {
+                                hit100.setPosition(X11,Y11);
                                 o11=nullptr;
                                 delete o11;
                                 sc=sc+(100*cb);
                                 hplife(HP);
                                 cb++;
+                                app.draw(hit100);
+                                app.display();
                             }
-                            if(((clock1.getElapsedTime().asMilliseconds()>=8102-1440)&&(clock1.getElapsedTime().asMilliseconds()<=8102))&&o12!=nullptr)
-                            if(((mouse_world.x>=(o12->x)-24)&&(mouse_world.x<=(o12->x)+24))&&((mouse_world.y>=(o12->y)-24)&&(mouse_world.y<=(o12->y)+24)))
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=7680-62-54-54)&&(clock1.getElapsedTime().asMilliseconds()<=7680-62-54))&&o11!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=7680+62+54)&&(clock1.getElapsedTime().asMilliseconds()<=7680+62+54+54))&&o11!=nullptr))//50
                             {
+                                hit50.setPosition(X11,Y11);
+                                o11=nullptr;
+                                delete o11;
+                                sc=sc+(50*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit50);
+                                app.display();
+                            }
+                            }
+                            if(o12!=nullptr&&(((mouse_world.x>=(o12->x)-24)&&(mouse_world.x<=(o12->x)+24))&&((mouse_world.y>=(o12->y)-24)&&(mouse_world.y<=(o12->y)+24))))
+                            {
+                            if(((clock1.getElapsedTime().asMilliseconds()>=8102-62)&&(clock1.getElapsedTime().asMilliseconds()<=8102+62))&&o12!=nullptr)//300
+                            {
+                                hit300.setPosition(X12,Y12);
+                                o12=nullptr;
+                                delete o12;
+                                sc=sc+(300*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit300);
+                                app.display();
+                            }
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=8102-62-54)&&(clock1.getElapsedTime().asMilliseconds()<=8102-62))&&o12!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=8102+62)&&(clock1.getElapsedTime().asMilliseconds()<=8102+62+54))&&o12!=nullptr))//100
+                            {
+                                hit100.setPosition(X12,Y12);
                                 o12=nullptr;
                                 delete o12;
                                 sc=sc+(100*cb);
                                 hplife(HP);
                                 cb++;
+                                app.draw(hit100);
+                                app.display();
                             }
-                            if(((clock1.getElapsedTime().asMilliseconds()>=8947-1440)&&(clock1.getElapsedTime().asMilliseconds()<=8947))&&o13!=nullptr)
-                            if(((mouse_world.x>=(o13->x)-24)&&(mouse_world.x<=(o13->x)+24))&&((mouse_world.y>=(o13->y)-24)&&(mouse_world.y<=(o13->y)+24)))
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=8102-62-54-54)&&(clock1.getElapsedTime().asMilliseconds()<=8102-62-54))&&o12!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=8102+62+54)&&(clock1.getElapsedTime().asMilliseconds()<=8102+62+54+54))&&o12!=nullptr))//50
                             {
+                                hit50.setPosition(X12,Y12);
+                                o12=nullptr;
+                                delete o12;
+                                sc=sc+(50*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit50);
+                                app.display();
+                            }
+                            }
+                            if(o13!=nullptr&&(((mouse_world.x>=(o13->x)-24)&&(mouse_world.x<=(o13->x)+24))&&((mouse_world.y>=(o13->y)-24)&&(mouse_world.y<=(o13->y)+24))))
+                            {
+                            if(((clock1.getElapsedTime().asMilliseconds()>=8947-62)&&(clock1.getElapsedTime().asMilliseconds()<=8947+62))&&o13!=nullptr)//300
+                            {
+                                hit300.setPosition(X13,Y13);
+                                o13=nullptr;
+                                delete o13;
+                                sc=sc+(300*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit300);
+                                app.display();
+                            }
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=8947-62-54)&&(clock1.getElapsedTime().asMilliseconds()<=8947-62))&&o13!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=8947+62)&&(clock1.getElapsedTime().asMilliseconds()<=8947+62+54))&&o13!=nullptr))//100
+                            {
+                                hit100.setPosition(X13,Y13);
                                 o13=nullptr;
                                 delete o13;
                                 sc=sc+(100*cb);
                                 hplife(HP);
                                 cb++;
+                                app.draw(hit100);
+                                app.display();
                             }
-                            if(((clock1.getElapsedTime().asMilliseconds()>=9792-1440)&&(clock1.getElapsedTime().asMilliseconds()<=9792))&&o14!=nullptr)
-                            if(((mouse_world.x>=(o14->x)-24)&&(mouse_world.x<=(o14->x)+24))&&((mouse_world.y>=(o14->y)-24)&&(mouse_world.y<=(o14->y)+24)))
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=8947-62-54-54)&&(clock1.getElapsedTime().asMilliseconds()<=8947-62-54))&&o13!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=8947+62+54)&&(clock1.getElapsedTime().asMilliseconds()<=8947+62+54+54))&&o13!=nullptr))//50
                             {
+                                hit50.setPosition(X13,Y13);
+                                o13=nullptr;
+                                delete o13;
+                                sc=sc+(50*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit50);
+                                app.display();
+                            }
+                            }
+                            if(o14!=nullptr&&(((mouse_world.x>=(o14->x)-24)&&(mouse_world.x<=(o14->x)+24))&&((mouse_world.y>=(o14->y)-24)&&(mouse_world.y<=(o14->y)+24))))
+                            {
+                            if(((clock1.getElapsedTime().asMilliseconds()>=9792-62)&&(clock1.getElapsedTime().asMilliseconds()<=9792+62))&&o14!=nullptr)//300
+                            {
+                                hit300.setPosition(X14,Y14);
+                                o14=nullptr;
+                                delete o14;
+                                sc=sc+(300*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit300);
+                                app.display();
+                            }
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=9792-62-54)&&(clock1.getElapsedTime().asMilliseconds()<=9792-62))&&o14!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=9792+62)&&(clock1.getElapsedTime().asMilliseconds()<=9792+62+54))&&o14!=nullptr))//100
+                            {
+                                hit100.setPosition(X14,Y14);
                                 o14=nullptr;
                                 delete o14;
                                 sc=sc+(100*cb);
                                 hplife(HP);
                                 cb++;
+                                app.draw(hit100);
+                                app.display();
                             }
-                            if(((clock1.getElapsedTime().asMilliseconds()>=10637-1440)&&(clock1.getElapsedTime().asMilliseconds()<=10637))&&o15!=nullptr)
-                            if(((mouse_world.x>=(o15->x)-24)&&(mouse_world.x<=(o15->x)+24))&&((mouse_world.y>=(o15->y)-24)&&(mouse_world.y<=(o15->y)+24)))
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=9792-62-54-54)&&(clock1.getElapsedTime().asMilliseconds()<=9792-62-54))&&o14!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=9792+62+54)&&(clock1.getElapsedTime().asMilliseconds()<=9792+62+54+54))&&o14!=nullptr))//50
                             {
+                                hit50.setPosition(X14,Y14);
+                                o14=nullptr;
+                                delete o14;
+                                sc=sc+(50*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit50);
+                                app.display();
+                            }
+                            }
+                            if(o15!=nullptr&&(((mouse_world.x>=(o15->x)-24)&&(mouse_world.x<=(o15->x)+24))&&((mouse_world.y>=(o15->y)-24)&&(mouse_world.y<=(o15->y)+24))))
+                            {
+                            if(((clock1.getElapsedTime().asMilliseconds()>=10637-62)&&(clock1.getElapsedTime().asMilliseconds()<=10637+62))&&o15!=nullptr)//300
+                            {
+                                hit300.setPosition(X15,Y15);
+                                o15=nullptr;
+                                delete o15;
+                                sc=sc+(300*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit300);
+                                app.display();
+                            }
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=10637-62-54)&&(clock1.getElapsedTime().asMilliseconds()<=10637-62))&&o15!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=10637+62)&&(clock1.getElapsedTime().asMilliseconds()<=10637+62+54))&&o15!=nullptr))//100
+                            {
+                                hit100.setPosition(X15,Y15);
                                 o15=nullptr;
                                 delete o15;
                                 sc=sc+(100*cb);
                                 hplife(HP);
                                 cb++;
+                                app.draw(hit100);
+                                app.display();
                             }
-                            if(((clock1.getElapsedTime().asMilliseconds()>=11482-1440)&&(clock1.getElapsedTime().asMilliseconds()<=11482))&&o16!=nullptr)
-                            if(((mouse_world.x>=(o16->x)-24)&&(mouse_world.x<=(o16->x)+24))&&((mouse_world.y>=(o16->y)-24)&&(mouse_world.y<=(o16->y)+24)))
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=10637-62-54-54)&&(clock1.getElapsedTime().asMilliseconds()<=10637-62-54))&&o15!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=10637+62+54)&&(clock1.getElapsedTime().asMilliseconds()<=10637+62+54+54))&&o15!=nullptr))//50
                             {
+                                hit50.setPosition(X15,Y15);
+                                o15=nullptr;
+                                delete o15;
+                                sc=sc+(50*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit50);
+                                app.display();
+                            }
+                            }
+                            if(o16!=nullptr&&(((mouse_world.x>=(o16->x)-24)&&(mouse_world.x<=(o16->x)+24))&&((mouse_world.y>=(o16->y)-24)&&(mouse_world.y<=(o16->y)+24))))
+                            {
+                            if(((clock1.getElapsedTime().asMilliseconds()>=11482-62)&&(clock1.getElapsedTime().asMilliseconds()<=11482+62))&&o16!=nullptr)//300
+                            {
+                                hit300.setPosition(X16,Y16);
+                                o16=nullptr;
+                                delete o16;
+                                sc=sc+(300*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit300);
+                                app.display();
+                            }
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=11482-62-54)&&(clock1.getElapsedTime().asMilliseconds()<=11482-62))&&o16!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=11482+62)&&(clock1.getElapsedTime().asMilliseconds()<=11482+62+54))&&o16!=nullptr))//100
+                            {
+                                hit100.setPosition(X16,Y16);
                                 o16=nullptr;
                                 delete o16;
                                 sc=sc+(100*cb);
                                 hplife(HP);
                                 cb++;
+                                app.draw(hit100);
+                                app.display();
                             }
-                            if(((clock1.getElapsedTime().asMilliseconds()>=12328-1440)&&(clock1.getElapsedTime().asMilliseconds()<=12328))&&o17!=nullptr)
-                            if(((mouse_world.x>=(o17->x)-24)&&(mouse_world.x<=(o17->x)+24))&&((mouse_world.y>=(o17->y)-24)&&(mouse_world.y<=(o17->y)+24)))
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=11482-62-54-54)&&(clock1.getElapsedTime().asMilliseconds()<=11482-62-54))&&o16!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=11482+62+54)&&(clock1.getElapsedTime().asMilliseconds()<=11482+62+54+54))&&o16!=nullptr))//50
                             {
+                                hit50.setPosition(X16,Y16);
+                                o16=nullptr;
+                                delete o16;
+                                sc=sc+(50*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit50);
+                                app.display();
+                            }
+                            }
+                            if(o17!=nullptr&&(((mouse_world.x>=(o17->x)-24)&&(mouse_world.x<=(o17->x)+24))&&((mouse_world.y>=(o17->y)-24)&&(mouse_world.y<=(o17->y)+24))))
+                            {
+                            if(((clock1.getElapsedTime().asMilliseconds()>=12328-62)&&(clock1.getElapsedTime().asMilliseconds()<=12328+62))&&o17!=nullptr)//300
+                            {
+                                hit300.setPosition(X17,Y17);
+                                o17=nullptr;
+                                delete o17;
+                                sc=sc+(300*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit300);
+                                app.display();
+                            }
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=12328-62-54)&&(clock1.getElapsedTime().asMilliseconds()<=12328-62))&&o17!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=12328+62)&&(clock1.getElapsedTime().asMilliseconds()<=12328+62+54))&&o17!=nullptr))//100
+                            {
+                                hit100.setPosition(X17,Y17);
                                 o17=nullptr;
                                 delete o17;
                                 sc=sc+(100*cb);
                                 hplife(HP);
                                 cb++;
+                                app.draw(hit100);
+                                app.display();
                             }
-                            if(((clock1.getElapsedTime().asMilliseconds()>=13173-1440)&&(clock1.getElapsedTime().asMilliseconds()<=13173))&&o18!=nullptr)
-                            if(((mouse_world.x>=(o18->x)-24)&&(mouse_world.x<=(o18->x)+24))&&((mouse_world.y>=(o18->y)-24)&&(mouse_world.y<=(o18->y)+24)))
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=12328-62-54-54)&&(clock1.getElapsedTime().asMilliseconds()<=12328-62-54))&&o17!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=12328+62+54)&&(clock1.getElapsedTime().asMilliseconds()<=12328+62+54+54))&&o17!=nullptr))//50
                             {
+                                hit50.setPosition(X17,Y17);
+                                o17=nullptr;
+                                delete o17;
+                                sc=sc+(50*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit50);
+                                app.display();
+                            }
+                            }
+                            if(o18!=nullptr&&(((mouse_world.x>=(o18->x)-24)&&(mouse_world.x<=(o18->x)+24))&&((mouse_world.y>=(o18->y)-24)&&(mouse_world.y<=(o18->y)+24))))
+                            {
+                            if(((clock1.getElapsedTime().asMilliseconds()>=13173-62)&&(clock1.getElapsedTime().asMilliseconds()<=13173+62))&&o18!=nullptr)//300
+                            {
+                                hit300.setPosition(X18,Y18);
+                                o18=nullptr;
+                                delete o18;
+                                sc=sc+(300*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit300);
+                                app.display();
+                            }
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=13173-62-54)&&(clock1.getElapsedTime().asMilliseconds()<=13173-62))&&o18!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=13173+62)&&(clock1.getElapsedTime().asMilliseconds()<=13173+62+54))&&o18!=nullptr))//100
+                            {
+                                hit100.setPosition(X18,Y18);
                                 o18=nullptr;
                                 delete o18;
                                 sc=sc+(100*cb);
                                 hplife(HP);
                                 cb++;
+                                app.draw(hit100);
+                                app.display();
                             }
-                            if(((clock1.getElapsedTime().asMilliseconds()>=14440-1440)&&(clock1.getElapsedTime().asMilliseconds()<=14440))&&o19!=nullptr)
-                            if(((mouse_world.x>=(o19->x)-24)&&(mouse_world.x<=(o19->x)+24))&&((mouse_world.y>=(o19->y)-24)&&(mouse_world.y<=(o19->y)+24)))
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=13173-62-54-54)&&(clock1.getElapsedTime().asMilliseconds()<=13173-62-54))&&o18!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=13173+62+54)&&(clock1.getElapsedTime().asMilliseconds()<=13173+62+54+54))&&o18!=nullptr))//50
                             {
+                                hit50.setPosition(X18,Y18);
+                                o18=nullptr;
+                                delete o18;
+                                sc=sc+(50*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit50);
+                                app.display();
+                            }
+                            }
+                            if(o19!=nullptr&&(((mouse_world.x>=(o19->x)-24)&&(mouse_world.x<=(o19->x)+24))&&((mouse_world.y>=(o19->y)-24)&&(mouse_world.y<=(o19->y)+24))))
+                            {
+                            if(((clock1.getElapsedTime().asMilliseconds()>=14440-62)&&(clock1.getElapsedTime().asMilliseconds()<=14440+62))&&o19!=nullptr)//300
+                            {
+                                hit300.setPosition(X19,Y19);
+                                o19=nullptr;
+                                delete o19;
+                                sc=sc+(300*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit300);
+                                app.display();
+                            }
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=14440-62-54)&&(clock1.getElapsedTime().asMilliseconds()<=14440-62))&&o19!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=14440+62)&&(clock1.getElapsedTime().asMilliseconds()<=14440+62+54))&&o19!=nullptr))//100
+                            {
+                                hit100.setPosition(X19,Y19);
                                 o19=nullptr;
                                 delete o19;
                                 sc=sc+(100*cb);
                                 hplife(HP);
                                 cb++;
+                                app.draw(hit100);
+                                app.display();
                             }
-                            if(((clock1.getElapsedTime().asMilliseconds()>=14863-1440)&&(clock1.getElapsedTime().asMilliseconds()<=14863))&&o20!=nullptr)
-                            if(((mouse_world.x>=(o20->x)-24)&&(mouse_world.x<=(o20->x)+24))&&((mouse_world.y>=(o20->y)-24)&&(mouse_world.y<=(o20->y)+24)))
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=14440-62-54-54)&&(clock1.getElapsedTime().asMilliseconds()<=14440-62-54))&&o19!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=14440+62+54)&&(clock1.getElapsedTime().asMilliseconds()<=14440+62+54+54))&&o19!=nullptr))//50
                             {
+                                hit50.setPosition(X19,Y19);
+                                o19=nullptr;
+                                delete o19;
+                                sc=sc+(50*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit50);
+                                app.display();
+                            }
+                            }
+                            if(o20!=nullptr&&(((mouse_world.x>=(o20->x)-24)&&(mouse_world.x<=(o20->x)+24))&&((mouse_world.y>=(o20->y)-24)&&(mouse_world.y<=(o20->y)+24))))
+                            {
+                            if(((clock1.getElapsedTime().asMilliseconds()>=14863-62)&&(clock1.getElapsedTime().asMilliseconds()<=14863+62))&&o20!=nullptr)//300
+                            {
+                                hit300.setPosition(X20,Y20);
+                                o20=nullptr;
+                                delete o20;
+                                sc=sc+(300*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit300);
+                                app.display();
+                            }
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=14863-62-54)&&(clock1.getElapsedTime().asMilliseconds()<=14863-62))&&o20!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=14863+62)&&(clock1.getElapsedTime().asMilliseconds()<=14863+62+54))&&o20!=nullptr))//100
+                            {
+                                hit100.setPosition(X20,Y20);
                                 o20=nullptr;
                                 delete o20;
                                 sc=sc+(100*cb);
                                 hplife(HP);
                                 cb++;
+                                app.draw(hit100);
+                                app.display();
                             }
-                            if(((clock1.getElapsedTime().asMilliseconds()>=15708-1440)&&(clock1.getElapsedTime().asMilliseconds()<=15708))&&o21!=nullptr)
-                            if(((mouse_world.x>=(o21->x)-24)&&(mouse_world.x<=(o21->x)+24))&&((mouse_world.y>=(o21->y)-24)&&(mouse_world.y<=(o21->y)+24)))
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=14863-62-54-54)&&(clock1.getElapsedTime().asMilliseconds()<=14863-62-54))&&o20!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=14863+62+54)&&(clock1.getElapsedTime().asMilliseconds()<=14863+62+54+54))&&o20!=nullptr))//50
                             {
+                                hit50.setPosition(X20,Y20);
+                                o20=nullptr;
+                                delete o20;
+                                sc=sc+(50*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit50);
+                                app.display();
+                            }
+                            }
+                            if(o21!=nullptr&&(((mouse_world.x>=(o21->x)-24)&&(mouse_world.x<=(o21->x)+24))&&((mouse_world.y>=(o21->y)-24)&&(mouse_world.y<=(o21->y)+24))))
+                            {
+                            if(((clock1.getElapsedTime().asMilliseconds()>=15708-62)&&(clock1.getElapsedTime().asMilliseconds()<=15708+62))&&o21!=nullptr)//300
+                            {
+                                hit300.setPosition(X21,Y21);
+                                o21=nullptr;
+                                delete o21;
+                                sc=sc+(300*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit300);
+                                app.display();
+                            }
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=15708-62-54)&&(clock1.getElapsedTime().asMilliseconds()<=15708-62))&&o21!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=15708+62)&&(clock1.getElapsedTime().asMilliseconds()<=15708+62+54))&&o21!=nullptr))//100
+                            {
+                                hit100.setPosition(X21,Y21);
                                 o21=nullptr;
                                 delete o21;
                                 sc=sc+(100*cb);
                                 hplife(HP);
                                 cb++;
+                                app.draw(hit100);
+                                app.display();
                             }
-                            if(((clock1.getElapsedTime().asMilliseconds()>=16553-1440)&&(clock1.getElapsedTime().asMilliseconds()<=16553))&&o22!=nullptr)
-                            if(((mouse_world.x>=(o22->x)-24)&&(mouse_world.x<=(o22->x)+24))&&((mouse_world.y>=(o22->y)-24)&&(mouse_world.y<=(o22->y)+24)))
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=15708-62-54-54)&&(clock1.getElapsedTime().asMilliseconds()<=15708-62-54))&&o21!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=15708+62+54)&&(clock1.getElapsedTime().asMilliseconds()<=15708+62+54+54))&&o21!=nullptr))//50
                             {
+                                hit50.setPosition(X21,Y21);
+                                o21=nullptr;
+                                delete o21;
+                                sc=sc+(50*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit50);
+                                app.display();
+                            }
+                            }
+                            if(o22!=nullptr&&(((mouse_world.x>=(o22->x)-24)&&(mouse_world.x<=(o22->x)+24))&&((mouse_world.y>=(o22->y)-24)&&(mouse_world.y<=(o22->y)+24))))
+                            {
+                            if(((clock1.getElapsedTime().asMilliseconds()>=16553-62)&&(clock1.getElapsedTime().asMilliseconds()<=16553+62))&&o22!=nullptr)//300
+                            {
+                                hit300.setPosition(X22,Y22);
+                                o22=nullptr;
+                                delete o22;
+                                sc=sc+(300*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit300);
+                                app.display();
+                            }
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=16553-62-54)&&(clock1.getElapsedTime().asMilliseconds()<=16553-62))&&o22!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=16553+62)&&(clock1.getElapsedTime().asMilliseconds()<=16553+62+54))&&o22!=nullptr))//100
+                            {
+                                hit100.setPosition(X22,Y22);
                                 o22=nullptr;
                                 delete o22;
                                 sc=sc+(100*cb);
                                 hplife(HP);
                                 cb++;
+                                app.draw(hit100);
+                                app.display();
                             }
-                            if(((clock1.getElapsedTime().asMilliseconds()>=17821-1440)&&(clock1.getElapsedTime().asMilliseconds()<=17821))&&o23!=nullptr)
-                            if(((mouse_world.x>=(o23->x)-24)&&(mouse_world.x<=(o23->x)+24))&&((mouse_world.y>=(o23->y)-24)&&(mouse_world.y<=(o23->y)+24)))
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=16553-62-54-54)&&(clock1.getElapsedTime().asMilliseconds()<=16553-62-54))&&o22!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=16553+62+54)&&(clock1.getElapsedTime().asMilliseconds()<=16553+62+54+54))&&o22!=nullptr))//50
                             {
+                                hit50.setPosition(X22,Y22);
+                                o22=nullptr;
+                                delete o22;
+                                sc=sc+(50*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit50);
+                                app.display();
+                            }
+                            }
+                            if(o23!=nullptr&&(((mouse_world.x>=(o23->x)-24)&&(mouse_world.x<=(o23->x)+24))&&((mouse_world.y>=(o23->y)-24)&&(mouse_world.y<=(o23->y)+24))))
+                            {
+                            if(((clock1.getElapsedTime().asMilliseconds()>=17821-62)&&(clock1.getElapsedTime().asMilliseconds()<=17821+62))&&o23!=nullptr)//300
+                            {
+                                hit300.setPosition(X23,Y23);
+                                o23=nullptr;
+                                delete o23;
+                                sc=sc+(300*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit300);
+                                app.display();
+                            }
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=17821-62-54)&&(clock1.getElapsedTime().asMilliseconds()<=17821-62))&&o23!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=17821+62)&&(clock1.getElapsedTime().asMilliseconds()<=17821+62+54))&&o23!=nullptr))//100
+                            {
+                                hit100.setPosition(X23,Y23);
                                 o23=nullptr;
                                 delete o23;
                                 sc=sc+(100*cb);
                                 hplife(HP);
                                 cb++;
+                                app.draw(hit100);
+                                app.display();
                             }
-                            if(((clock1.getElapsedTime().asMilliseconds()>=18243-1440)&&(clock1.getElapsedTime().asMilliseconds()<=18243))&&o24!=nullptr)
-                            if(((mouse_world.x>=(o24->x)-24)&&(mouse_world.x<=(o24->x)+24))&&((mouse_world.y>=(o24->y)-24)&&(mouse_world.y<=(o24->y)+24)))
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=17821-62-54-54)&&(clock1.getElapsedTime().asMilliseconds()<=17821-62-54))&&o23!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=17821+62+54)&&(clock1.getElapsedTime().asMilliseconds()<=17821+62+54+54))&&o23!=nullptr))//50
                             {
+                                hit50.setPosition(X23,Y23);
+                                o23=nullptr;
+                                delete o23;
+                                sc=sc+(50*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit50);
+                                app.display();
+                            }
+                            }
+                            if(o24!=nullptr&&(((mouse_world.x>=(o24->x)-24)&&(mouse_world.x<=(o24->x)+24))&&((mouse_world.y>=(o24->y)-24)&&(mouse_world.y<=(o24->y)+24))))
+                            {
+                            if(((clock1.getElapsedTime().asMilliseconds()>=18243-62)&&(clock1.getElapsedTime().asMilliseconds()<=18243+62))&&o24!=nullptr)//300
+                            {
+                                hit300.setPosition(X24,Y24);
+                                o24=nullptr;
+                                delete o24;
+                                sc=sc+(300*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit300);
+                                app.display();
+                            }
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=18243-62-54)&&(clock1.getElapsedTime().asMilliseconds()<=18243-62))&&o24!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=18243+62)&&(clock1.getElapsedTime().asMilliseconds()<=18243+62+54))&&o24!=nullptr))//100
+                            {
+                                hit100.setPosition(X24,Y24);
                                 o24=nullptr;
                                 delete o24;
                                 sc=sc+(100*cb);
                                 hplife(HP);
                                 cb++;
+                                app.draw(hit100);
+                                app.display();
                             }
-                            if(((clock1.getElapsedTime().asMilliseconds()>=19088-1440)&&(clock1.getElapsedTime().asMilliseconds()<=19088))&&o25!=nullptr)
-                            if(((mouse_world.x>=(o25->x)-24)&&(mouse_world.x<=(o25->x)+24))&&((mouse_world.y>=(o25->y)-24)&&(mouse_world.y<=(o25->y)+24)))
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=18243-62-54-54)&&(clock1.getElapsedTime().asMilliseconds()<=18243-62-54))&&o24!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=18243+62+54)&&(clock1.getElapsedTime().asMilliseconds()<=18243+62+54+54))&&o24!=nullptr))//50
                             {
+                                hit50.setPosition(X24,Y24);
+                                o24=nullptr;
+                                delete o24;
+                                sc=sc+(50*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit50);
+                                app.display();
+                            }
+                            }
+                            if(o25!=nullptr&&(((mouse_world.x>=(o25->x)-24)&&(mouse_world.x<=(o25->x)+24))&&((mouse_world.y>=(o25->y)-24)&&(mouse_world.y<=(o25->y)+24))))
+                            {
+                            if(((clock1.getElapsedTime().asMilliseconds()>=19088-62)&&(clock1.getElapsedTime().asMilliseconds()<=19088+62))&&o25!=nullptr)//300
+                            {
+                                hit300.setPosition(X25,Y25);
+                                o25=nullptr;
+                                delete o25;
+                                sc=sc+(300*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit300);
+                                app.display();
+                            }
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=19088-62-54)&&(clock1.getElapsedTime().asMilliseconds()<=19088-62))&&o25!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=19088+62)&&(clock1.getElapsedTime().asMilliseconds()<=19088+62+54))&&o25!=nullptr))//100
+                            {
+                                hit100.setPosition(X25,Y25);
                                 o25=nullptr;
                                 delete o25;
                                 sc=sc+(100*cb);
                                 hplife(HP);
                                 cb++;
+                                app.draw(hit100);
+                                app.display();
                             }
-                            if(((clock1.getElapsedTime().asMilliseconds()>=19933-1440)&&(clock1.getElapsedTime().asMilliseconds()<=19933))&&o26!=nullptr)
-                            if(((mouse_world.x>=(o26->x)-24)&&(mouse_world.x<=(o26->x)+24))&&((mouse_world.y>=(o26->y)-24)&&(mouse_world.y<=(o26->y)+24)))
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=19088-62-54-54)&&(clock1.getElapsedTime().asMilliseconds()<=19088-62-54))&&o25!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=19088+62+54)&&(clock1.getElapsedTime().asMilliseconds()<=19088+62+54+54))&&o25!=nullptr))//50
                             {
+                                hit50.setPosition(X25,Y25);
+                                o25=nullptr;
+                                delete o25;
+                                sc=sc+(50*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit50);
+                                app.display();
+                            }
+                            }
+                            if(o26!=nullptr&&(((mouse_world.x>=(o26->x)-24)&&(mouse_world.x<=(o26->x)+24))&&((mouse_world.y>=(o26->y)-24)&&(mouse_world.y<=(o26->y)+24))))
+                            {
+                            if(((clock1.getElapsedTime().asMilliseconds()>=19933-62)&&(clock1.getElapsedTime().asMilliseconds()<=19933+62))&&o26!=nullptr)//300
+                            {
+                                hit300.setPosition(X26,Y26);
+                                o26=nullptr;
+                                delete o26;
+                                sc=sc+(300*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit300);
+                                app.display();
+                            }
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=19933-62-54)&&(clock1.getElapsedTime().asMilliseconds()<=19933-62))&&o26!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=19933+62)&&(clock1.getElapsedTime().asMilliseconds()<=19933+62+54))&&o26!=nullptr))//100
+                            {
+                                hit100.setPosition(X26,Y26);
                                 o26=nullptr;
                                 delete o26;
                                 sc=sc+(100*cb);
                                 hplife(HP);
                                 cb++;
+                                app.draw(hit100);
+                                app.display();
                             }
-                            if(((clock1.getElapsedTime().asMilliseconds()>=21201-1440)&&(clock1.getElapsedTime().asMilliseconds()<=21201))&&o27!=nullptr)
-                            if(((mouse_world.x>=(o27->x)-24)&&(mouse_world.x<=(o27->x)+24))&&((mouse_world.y>=(o27->y)-24)&&(mouse_world.y<=(o27->y)+24)))
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=19933-62-54-54)&&(clock1.getElapsedTime().asMilliseconds()<=19933-62-54))&&o26!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=19933+62+54)&&(clock1.getElapsedTime().asMilliseconds()<=19933+62+54+54))&&o26!=nullptr))//50
                             {
+                                hit50.setPosition(X26,Y26);
+                                o26=nullptr;
+                                delete o26;
+                                sc=sc+(50*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit50);
+                                app.display();
+                            }
+                            }
+                            if(o27!=nullptr&&(((mouse_world.x>=(o27->x)-24)&&(mouse_world.x<=(o27->x)+24))&&((mouse_world.y>=(o27->y)-24)&&(mouse_world.y<=(o27->y)+24))))
+                            {
+                            if(((clock1.getElapsedTime().asMilliseconds()>=21201-62)&&(clock1.getElapsedTime().asMilliseconds()<=21201+62))&&o27!=nullptr)//300
+                            {
+                                hit300.setPosition(X27,Y27);
+                                o27=nullptr;
+                                delete o27;
+                                sc=sc+(300*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit300);
+                                app.display();
+                            }
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=21201-62-54)&&(clock1.getElapsedTime().asMilliseconds()<=21201-62))&&o27!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=21201+62)&&(clock1.getElapsedTime().asMilliseconds()<=21201+62+54))&&o27!=nullptr))//100
+                            {
+                                hit100.setPosition(X27,Y27);
                                 o27=nullptr;
                                 delete o27;
                                 sc=sc+(100*cb);
                                 hplife(HP);
                                 cb++;
+                                app.draw(hit100);
+                                app.display();
                             }
-                            if(((clock1.getElapsedTime().asMilliseconds()>=21623-1440)&&(clock1.getElapsedTime().asMilliseconds()<=21623))&&o28!=nullptr)
-                            if(((mouse_world.x>=(o28->x)-24)&&(mouse_world.x<=(o28->x)+24))&&((mouse_world.y>=(o28->y)-24)&&(mouse_world.y<=(o28->y)+24)))
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=21201-62-54-54)&&(clock1.getElapsedTime().asMilliseconds()<=21201-62-54))&&o27!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=21201+62+54)&&(clock1.getElapsedTime().asMilliseconds()<=21201+62+54+54))&&o27!=nullptr))//50
                             {
+                                hit50.setPosition(X27,Y27);
+                                o27=nullptr;
+                                delete o27;
+                                sc=sc+(50*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit50);
+                                app.display();
+                            }
+                            }
+                            if(o28!=nullptr&&(((mouse_world.x>=(o28->x)-24)&&(mouse_world.x<=(o28->x)+24))&&((mouse_world.y>=(o28->y)-24)&&(mouse_world.y<=(o28->y)+24))))
+                            {
+                            if(((clock1.getElapsedTime().asMilliseconds()>=21623-62)&&(clock1.getElapsedTime().asMilliseconds()<=21623+62))&&o28!=nullptr)//300
+                            {
+                                hit300.setPosition(X28,Y28);
+                                o28=nullptr;
+                                delete o28;
+                                sc=sc+(300*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit300);
+                                app.display();
+                            }
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=21623-62-54)&&(clock1.getElapsedTime().asMilliseconds()<=21623-62))&&o28!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=21623+62)&&(clock1.getElapsedTime().asMilliseconds()<=21623+62+54))&&o28!=nullptr))//100
+                            {
+                                hit100.setPosition(X28,Y28);
                                 o28=nullptr;
                                 delete o28;
                                 sc=sc+(100*cb);
                                 hplife(HP);
                                 cb++;
+                                app.draw(hit100);
+                                app.display();
                             }
-                            if(((clock1.getElapsedTime().asMilliseconds()>=22468-1440)&&(clock1.getElapsedTime().asMilliseconds()<=22468))&&o29!=nullptr)
-                            if(((mouse_world.x>=(o29->x)-24)&&(mouse_world.x<=(o29->x)+24))&&((mouse_world.y>=(o29->y)-24)&&(mouse_world.y<=(o29->y)+24)))
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=21623-62-54-54)&&(clock1.getElapsedTime().asMilliseconds()<=21623-62-54))&&o28!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=21623+62+54)&&(clock1.getElapsedTime().asMilliseconds()<=21623+62+54+54))&&o28!=nullptr))//50
                             {
+                                hit50.setPosition(X28,Y28);
+                                o28=nullptr;
+                                delete o28;
+                                sc=sc+(50*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit50);
+                                app.display();
+                            }
+                            }
+                            if(o29!=nullptr&&(((mouse_world.x>=(o29->x)-24)&&(mouse_world.x<=(o29->x)+24))&&((mouse_world.y>=(o29->y)-24)&&(mouse_world.y<=(o29->y)+24))))
+                            {
+                            if(((clock1.getElapsedTime().asMilliseconds()>=22468-62)&&(clock1.getElapsedTime().asMilliseconds()<=22468+62))&&o29!=nullptr)//300
+                            {
+                                hit300.setPosition(X29,Y29);
+                                o29=nullptr;
+                                delete o29;
+                                sc=sc+(300*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit300);
+                                app.display();
+                            }
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=22468-62-54)&&(clock1.getElapsedTime().asMilliseconds()<=22468-62))&&o29!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=22468+62)&&(clock1.getElapsedTime().asMilliseconds()<=22468+62+54))&&o29!=nullptr))//100
+                            {
+                                hit100.setPosition(X29,Y29);
                                 o29=nullptr;
                                 delete o29;
                                 sc=sc+(100*cb);
                                 hplife(HP);
                                 cb++;
+                                app.draw(hit100);
+                                app.display();
                             }
-                            if(((clock1.getElapsedTime().asMilliseconds()>=23102-1440)&&(clock1.getElapsedTime().asMilliseconds()<=23102))&&o30!=nullptr)
-                            if(((mouse_world.x>=(o30->x)-24)&&(mouse_world.x<=(o30->x)+24))&&((mouse_world.y>=(o30->y)-24)&&(mouse_world.y<=(o30->y)+24)))
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=22468-62-54-54)&&(clock1.getElapsedTime().asMilliseconds()<=22468-62-54))&&o29!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=22468+62+54)&&(clock1.getElapsedTime().asMilliseconds()<=22468+62+54+54))&&o29!=nullptr))//50
                             {
+                                hit50.setPosition(X29,Y29);
+                                o29=nullptr;
+                                delete o29;
+                                sc=sc+(50*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit50);
+                                app.display();
+                            }
+                            }
+                            if(o30!=nullptr&&(((mouse_world.x>=(o30->x)-24)&&(mouse_world.x<=(o30->x)+24))&&((mouse_world.y>=(o30->y)-24)&&(mouse_world.y<=(o30->y)+24))))
+                            {
+                            if(((clock1.getElapsedTime().asMilliseconds()>=23102-62)&&(clock1.getElapsedTime().asMilliseconds()<=23102+62))&&o30!=nullptr)//300
+                            {
+                                hit300.setPosition(X30,Y30);
+                                o30=nullptr;
+                                delete o30;
+                                sc=sc+(300*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit300);
+                                app.display();
+                            }
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=23102-62-54)&&(clock1.getElapsedTime().asMilliseconds()<=23102-62))&&o30!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=23102+62)&&(clock1.getElapsedTime().asMilliseconds()<=23102+62+54))&&o30!=nullptr))//100
+                            {
+                                hit100.setPosition(X30,Y30);
                                 o30=nullptr;
                                 delete o30;
                                 sc=sc+(100*cb);
                                 hplife(HP);
                                 cb++;
+                                app.draw(hit100);
+                                app.display();
                             }
-                            if(((clock1.getElapsedTime().asMilliseconds()>=24159-1440)&&(clock1.getElapsedTime().asMilliseconds()<=24159))&&o31!=nullptr)
-                            if(((mouse_world.x>=(o31->x)-24)&&(mouse_world.x<=(o31->x)+24))&&((mouse_world.y>=(o31->y)-24)&&(mouse_world.y<=(o31->y)+24)))
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=23102-62-54-54)&&(clock1.getElapsedTime().asMilliseconds()<=23102-62-54))&&o30!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=23102+62+54)&&(clock1.getElapsedTime().asMilliseconds()<=23102+62+54+54))&&o30!=nullptr))//50
                             {
+                                hit50.setPosition(X30,Y30);
+                                o30=nullptr;
+                                delete o30;
+                                sc=sc+(50*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit50);
+                                app.display();
+                            }
+                            }
+                            if(o31!=nullptr&&(((mouse_world.x>=(o31->x)-24)&&(mouse_world.x<=(o31->x)+24))&&((mouse_world.y>=(o31->y)-24)&&(mouse_world.y<=(o31->y)+24))))
+                            {
+                            if(((clock1.getElapsedTime().asMilliseconds()>=24159-62)&&(clock1.getElapsedTime().asMilliseconds()<=24159+62))&&o31!=nullptr)//300
+                            {
+                                hit300.setPosition(X31,Y31);
+                                o31=nullptr;
+                                delete o31;
+                                sc=sc+(300*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit300);
+                                app.display();
+                            }
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=24159-62-54)&&(clock1.getElapsedTime().asMilliseconds()<=24159-62))&&o31!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=24159+62)&&(clock1.getElapsedTime().asMilliseconds()<=24159+62+54))&&o31!=nullptr))//100
+                            {
+                                hit100.setPosition(X31,Y31);
                                 o31=nullptr;
                                 delete o31;
                                 sc=sc+(100*cb);
                                 hplife(HP);
                                 cb++;
+                                app.draw(hit100);
+                                app.display();
                             }
-                            if(((clock1.getElapsedTime().asMilliseconds()>=24792-1440)&&(clock1.getElapsedTime().asMilliseconds()<=24792))&&o32!=nullptr)
-                            if(((mouse_world.x>=(o32->x)-24)&&(mouse_world.x<=(o32->x)+24))&&((mouse_world.y>=(o32->y)-24)&&(mouse_world.y<=(o32->y)+24)))
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=24159-62-54-54)&&(clock1.getElapsedTime().asMilliseconds()<=24159-62-54))&&o31!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=24159+62+54)&&(clock1.getElapsedTime().asMilliseconds()<=24159+62+54+54))&&o31!=nullptr))//50
                             {
+                                hit50.setPosition(X31,Y31);
+                                o31=nullptr;
+                                delete o31;
+                                sc=sc+(50*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit50);
+                                app.display();
+                            }
+                            }
+                            if(o32!=nullptr&&(((mouse_world.x>=(o32->x)-24)&&(mouse_world.x<=(o32->x)+24))&&((mouse_world.y>=(o32->y)-24)&&(mouse_world.y<=(o32->y)+24))))
+                            {
+                            if(((clock1.getElapsedTime().asMilliseconds()>=24792-62)&&(clock1.getElapsedTime().asMilliseconds()<=24792+62))&&o32!=nullptr)//300
+                            {
+                                hit300.setPosition(X32,Y32);
+                                o32=nullptr;
+                                delete o32;
+                                sc=sc+(300*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit300);
+                                app.display();
+                            }
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=24792-62-54)&&(clock1.getElapsedTime().asMilliseconds()<=24792-62))&&o32!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=24792+62)&&(clock1.getElapsedTime().asMilliseconds()<=24792+62+54))&&o32!=nullptr))//100
+                            {
+                                hit100.setPosition(X32,Y32);
                                 o32=nullptr;
                                 delete o32;
                                 sc=sc+(100*cb);
                                 hplife(HP);
                                 cb++;
+                                app.draw(hit100);
+                                app.display();
                             }
-                            if(((clock1.getElapsedTime().asMilliseconds()>=25849-1440)&&(clock1.getElapsedTime().asMilliseconds()<=25849))&&o33!=nullptr)
-                            if(((mouse_world.x>=(o33->x)-24)&&(mouse_world.x<=(o33->x)+24))&&((mouse_world.y>=(o33->y)-24)&&(mouse_world.y<=(o33->y)+24)))
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=24792-62-54-54)&&(clock1.getElapsedTime().asMilliseconds()<=24792-62-54))&&o32!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=24792+62+54)&&(clock1.getElapsedTime().asMilliseconds()<=24792+62+54+54))&&o32!=nullptr))//50
                             {
+                                hit50.setPosition(X32,Y32);
+                                o32=nullptr;
+                                delete o32;
+                                sc=sc+(50*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit50);
+                                app.display();
+                            }
+                            }
+                            if(o33!=nullptr&&(((mouse_world.x>=(o33->x)-24)&&(mouse_world.x<=(o33->x)+24))&&((mouse_world.y>=(o33->y)-24)&&(mouse_world.y<=(o33->y)+24))))
+                            {
+                            if(((clock1.getElapsedTime().asMilliseconds()>=25849-62)&&(clock1.getElapsedTime().asMilliseconds()<=25849+62))&&o33!=nullptr)//300
+                            {
+                                hit300.setPosition(X33,Y33);
+                                o33=nullptr;
+                                delete o33;
+                                sc=sc+(300*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit300);
+                                app.display();
+                            }
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=25849-62-54)&&(clock1.getElapsedTime().asMilliseconds()<=25849-62))&&o33!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=25849+62)&&(clock1.getElapsedTime().asMilliseconds()<=25849+62+54))&&o33!=nullptr))//100
+                            {
+                                hit100.setPosition(X33,Y33);
                                 o33=nullptr;
                                 delete o33;
                                 sc=sc+(100*cb);
                                 hplife(HP);
                                 cb++;
+                                app.draw(hit100);
+                                app.display();
                             }
-                            if(((clock1.getElapsedTime().asMilliseconds()>=26482-1440)&&(clock1.getElapsedTime().asMilliseconds()<=26482))&&o34!=nullptr)
-                            if(((mouse_world.x>=(o34->x)-24)&&(mouse_world.x<=(o34->x)+24))&&((mouse_world.y>=(o34->y)-24)&&(mouse_world.y<=(o34->y)+24)))
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=25849-62-54-54)&&(clock1.getElapsedTime().asMilliseconds()<=25849-62-54))&&o33!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=25849+62+54)&&(clock1.getElapsedTime().asMilliseconds()<=25849+62+54+54))&&o33!=nullptr))//50
                             {
+                                hit50.setPosition(X33,Y33);
+                                o33=nullptr;
+                                delete o33;
+                                sc=sc+(50*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit50);
+                                app.display();
+                            }
+                            }
+                            if(o34!=nullptr&&(((mouse_world.x>=(o34->x)-24)&&(mouse_world.x<=(o34->x)+24))&&((mouse_world.y>=(o34->y)-24)&&(mouse_world.y<=(o34->y)+24))))
+                            {
+                            if(((clock1.getElapsedTime().asMilliseconds()>=26482-62)&&(clock1.getElapsedTime().asMilliseconds()<=26482+62))&&o34!=nullptr)//300
+                            {
+                                hit300.setPosition(X34,Y34);
+                                o34=nullptr;
+                                delete o34;
+                                sc=sc+(300*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit300);
+                                app.display();
+                            }
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=26482-62-54)&&(clock1.getElapsedTime().asMilliseconds()<=26482-62))&&o34!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=26482+62)&&(clock1.getElapsedTime().asMilliseconds()<=26482+62+54))&&o34!=nullptr))//100
+                            {
+                                hit100.setPosition(X34,Y34);
                                 o34=nullptr;
                                 delete o34;
                                 sc=sc+(100*cb);
                                 hplife(HP);
                                 cb++;
+                                app.draw(hit100);
+                                app.display();
                             }
-                            if(((clock1.getElapsedTime().asMilliseconds()>=27539-1440)&&(clock1.getElapsedTime().asMilliseconds()<=27539))&&o35!=nullptr)
-                            if(((mouse_world.x>=(o35->x)-24)&&(mouse_world.x<=(o35->x)+24))&&((mouse_world.y>=(o35->y)-24)&&(mouse_world.y<=(o35->y)+24)))
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=26482-62-54-54)&&(clock1.getElapsedTime().asMilliseconds()<=26482-62-54))&&o34!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=26482+62+54)&&(clock1.getElapsedTime().asMilliseconds()<=26482+62+54+54))&&o34!=nullptr))//50
                             {
+                                hit50.setPosition(X34,Y34);
+                                o34=nullptr;
+                                delete o34;
+                                sc=sc+(50*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit50);
+                                app.display();
+                            }
+                            }
+                            if(o35!=nullptr&&(((mouse_world.x>=(o35->x)-24)&&(mouse_world.x<=(o35->x)+24))&&((mouse_world.y>=(o35->y)-24)&&(mouse_world.y<=(o35->y)+24))))
+                            {
+                            if(((clock1.getElapsedTime().asMilliseconds()>=27539-62)&&(clock1.getElapsedTime().asMilliseconds()<=27539+62))&&o35!=nullptr)//300
+                            {
+                                hit300.setPosition(X35,Y35);
+                                o35=nullptr;
+                                delete o35;
+                                sc=sc+(300*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit300);
+                                app.display();
+                            }
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=27539-62-54)&&(clock1.getElapsedTime().asMilliseconds()<=27539-62))&&o35!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=27539+62)&&(clock1.getElapsedTime().asMilliseconds()<=27539+62+54))&&o35!=nullptr))//100
+                            {
+                                hit100.setPosition(X35,Y35);
                                 o35=nullptr;
                                 delete o35;
                                 sc=sc+(100*cb);
                                 hplife(HP);
                                 cb++;
+                                app.draw(hit100);
+                                app.display();
                             }
-                            if(((clock1.getElapsedTime().asMilliseconds()>=28384-1440)&&(clock1.getElapsedTime().asMilliseconds()<=28384))&&o36!=nullptr)
-                            if(((mouse_world.x>=(o36->x)-24)&&(mouse_world.x<=(o36->x)+24))&&((mouse_world.y>=(o36->y)-24)&&(mouse_world.y<=(o36->y)+24)))
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=27539-62-54-54)&&(clock1.getElapsedTime().asMilliseconds()<=27539-62-54))&&o35!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=27539+62+54)&&(clock1.getElapsedTime().asMilliseconds()<=27539+62+54+54))&&o35!=nullptr))//50
                             {
+                                hit50.setPosition(X35,Y35);
+                                o35=nullptr;
+                                delete o35;
+                                sc=sc+(50*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit50);
+                                app.display();
+                            }
+                            }
+                            if(o36!=nullptr&&(((mouse_world.x>=(o36->x)-24)&&(mouse_world.x<=(o36->x)+24))&&((mouse_world.y>=(o36->y)-24)&&(mouse_world.y<=(o36->y)+24))))
+                            {
+                            if(((clock1.getElapsedTime().asMilliseconds()>=28384-62)&&(clock1.getElapsedTime().asMilliseconds()<=28384+62))&&o36!=nullptr)//300
+                            {
+                                hit300.setPosition(X36,Y36);
+                                o36=nullptr;
+                                delete o36;
+                                sc=sc+(300*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit300);
+                                app.display();
+                            }
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=28384-62-54)&&(clock1.getElapsedTime().asMilliseconds()<=28384-62))&&o36!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=28384+62)&&(clock1.getElapsedTime().asMilliseconds()<=28384+62+54))&&o36!=nullptr))//100
+                            {
+                                hit100.setPosition(X36,Y36);
                                 o36=nullptr;
                                 delete o36;
                                 sc=sc+(100*cb);
                                 hplife(HP);
                                 cb++;
+                                app.draw(hit100);
+                                app.display();
                             }
-                            if(((clock1.getElapsedTime().asMilliseconds()>=28490-1440)&&(clock1.getElapsedTime().asMilliseconds()<=28490))&&o37!=nullptr)
-                            if(((mouse_world.x>=(o37->x)-24)&&(mouse_world.x<=(o37->x)+24))&&((mouse_world.y>=(o37->y)-24)&&(mouse_world.y<=(o37->y)+24)))
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=28384-62-54-54)&&(clock1.getElapsedTime().asMilliseconds()<=28384-62-54))&&o36!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=28384+62+54)&&(clock1.getElapsedTime().asMilliseconds()<=28384+62+54+54))&&o36!=nullptr))//50
                             {
+                                hit50.setPosition(X36,Y36);
+                                o36=nullptr;
+                                delete o36;
+                                sc=sc+(50*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit50);
+                                app.display();
+                            }
+                            }
+                            if(o37!=nullptr&&(((mouse_world.x>=(o37->x)-24)&&(mouse_world.x<=(o37->x)+24))&&((mouse_world.y>=(o37->y)-24)&&(mouse_world.y<=(o37->y)+24))))
+                            {
+                            if(((clock1.getElapsedTime().asMilliseconds()>=28490-62)&&(clock1.getElapsedTime().asMilliseconds()<=28490+62))&&o37!=nullptr)//300
+                            {
+                                hit300.setPosition(X37,Y37);
+                                o37=nullptr;
+                                delete o37;
+                                sc=sc+(300*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit300);
+                                app.display();
+                            }
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=28490-62-54)&&(clock1.getElapsedTime().asMilliseconds()<=28490-62))&&o37!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=28490+62)&&(clock1.getElapsedTime().asMilliseconds()<=28490+62+54))&&o37!=nullptr))//100
+                            {
+                                hit100.setPosition(X37,Y37);
                                 o37=nullptr;
                                 delete o37;
                                 sc=sc+(100*cb);
                                 hplife(HP);
                                 cb++;
+                                app.draw(hit100);
+                                app.display();
+                            }
+                            else if((((clock1.getElapsedTime().asMilliseconds()>=28490-62-54-54)&&(clock1.getElapsedTime().asMilliseconds()<=28490-62-54))&&o37!=nullptr)
+                            ||(((clock1.getElapsedTime().asMilliseconds()>=28490+62+54)&&(clock1.getElapsedTime().asMilliseconds()<=28490+62+54+54))&&o37!=nullptr))//50
+                            {
+                                hit50.setPosition(X37,Y37);
+                                o37=nullptr;
+                                delete o37;
+                                sc=sc+(50*cb);
+                                hplife(HP);
+                                cb++;
+                                app.draw(hit50);
+                                app.display();
                             }
                             }
+                        }
         }
 
 
@@ -1066,7 +3160,7 @@ bool Gameplay(RenderWindow & app, Music* music)
 
         o2->t=clock1.getElapsedTime().asMilliseconds();
         o2->draw(app);
-        X2+=0.325;Y2+=0.325;r2-=0.325;
+        X2+=0.293;Y2+=0.293;r2-=0.293;
         o2->update(app,r2,X2,Y2);
 
     }
@@ -1075,7 +3169,7 @@ bool Gameplay(RenderWindow & app, Music* music)
     {
         o3->t=clock1.getElapsedTime().asMilliseconds();
         o3->draw(app);
-        X3+=0.35;Y3+=0.35;r3-=0.35;
+        X3+=0.293;Y3+=0.293;r3-=0.293;
         o3->update(app,r3,X3,Y3);
     }
     else if(((clock1.getElapsedTime().asMilliseconds()>1342))&&o3!=nullptr) {delete o3; o3=nullptr; hpdrainmiss(HP);}
@@ -1083,7 +3177,7 @@ bool Gameplay(RenderWindow & app, Music* music)
     {
         o4->t=clock1.getElapsedTime().asMilliseconds();
         o4->draw(app);
-        X4+=0.325;Y4+=0.325;r4-=0.325;
+        X4+=0.293;Y4+=0.293;r4-=0.293;
         o4->update(app,r4,X4,Y4);
     }
     else if(((clock1.getElapsedTime().asMilliseconds()>1764))&&o4!=nullptr) {delete o4; o4=nullptr; hpdrainmiss(HP);}
@@ -1091,7 +3185,7 @@ bool Gameplay(RenderWindow & app, Music* music)
     {
         o5->t=clock1.getElapsedTime().asMilliseconds();
         o5->draw(app);
-        X5+=0.325;Y5+=0.325;r5-=0.325;
+        X5+=0.293;Y5+=0.293;r5-=0.293;
         o5->update(app,r5,X5,Y5);
     }
     else if(((clock1.getElapsedTime().asMilliseconds()>2609))&&o5!=nullptr) {delete o5; o5=nullptr; hpdrainmiss(HP);}
@@ -1099,7 +3193,7 @@ bool Gameplay(RenderWindow & app, Music* music)
     {
         o6->t=clock1.getElapsedTime().asMilliseconds();
         o6->draw(app);
-        X6+=0.325;Y6+=0.325;r6-=0.325;
+        X6+=0.293;Y6+=0.293;r6-=0.293;
         o6->update(app,r6,X6,Y6);
     }
     else if(((clock1.getElapsedTime().asMilliseconds()>3032))&&o6!=nullptr) {delete o6; o6=nullptr; hpdrainmiss(HP);}
@@ -1107,7 +3201,7 @@ bool Gameplay(RenderWindow & app, Music* music)
     {
         o7->t=clock1.getElapsedTime().asMilliseconds();
         o7->draw(app);
-        X7+=0.325;Y7+=0.325;r7-=0.325;
+        X7+=0.293;Y7+=0.293;r7-=0.293;
         o7->update(app,r7,X7,Y7);
     }
     else if(((clock1.getElapsedTime().asMilliseconds()>3877))&&o7!=nullptr) {delete o7; o7=nullptr; hpdrainmiss(HP);}
@@ -1115,7 +3209,7 @@ bool Gameplay(RenderWindow & app, Music* music)
     {
         o8->t=clock1.getElapsedTime().asMilliseconds();
         o8->draw(app);
-        X8+=0.325;Y8+=0.325;r8-=0.325;
+        X8+=0.293;Y8+=0.293;r8-=0.293;
         o8->update(app,r8,X8,Y8);
     }
     else if(((clock1.getElapsedTime().asMilliseconds()>4722))&&o8!=nullptr) {delete o8; o8=nullptr; hpdrainmiss(HP);}
@@ -1123,7 +3217,7 @@ bool Gameplay(RenderWindow & app, Music* music)
     {
         o9->t=clock1.getElapsedTime().asMilliseconds();
         o9->draw(app);
-        X9+=0.325;Y9+=0.325;r9-=0.325;
+        X9+=0.293;Y9+=0.293;r9-=0.293;
         o9->update(app,r9,X9,Y9);
     }
     else if(((clock1.getElapsedTime().asMilliseconds()>5567))&&o9!=nullptr) {delete o9; o9=nullptr; hpdrainmiss(HP);}
@@ -1131,7 +3225,7 @@ bool Gameplay(RenderWindow & app, Music* music)
     {
         o10->t=clock1.getElapsedTime().asMilliseconds();
         o10->draw(app);
-        X10+=0.325;Y10+=0.325;r10-=0.325;
+        X10+=0.293;Y10+=0.293;r10-=0.293;
         o10->update(app,r10,X10,Y10);
     }
     else if(((clock1.getElapsedTime().asMilliseconds()>6412))&&o10!=nullptr) {delete o10; o10=nullptr; hpdrainmiss(HP);}
@@ -1139,7 +3233,7 @@ bool Gameplay(RenderWindow & app, Music* music)
     {
         o11->t=clock1.getElapsedTime().asMilliseconds();
         o11->draw(app);
-        X11+=0.325;Y11+=0.325;r11-=0.325;
+        X11+=0.293;Y11+=0.293;r11-=0.293;
         o11->update(app,r11,X11,Y11);
     }
     else if(((clock1.getElapsedTime().asMilliseconds()>7680))&&o11!=nullptr) {delete o11; o11=nullptr; hpdrainmiss(HP);}
@@ -1147,7 +3241,7 @@ bool Gameplay(RenderWindow & app, Music* music)
     {
         o12->t=clock1.getElapsedTime().asMilliseconds();
         o12->draw(app);
-        X12+=0.325;Y12+=0.325;r12-=0.325;
+        X12+=0.293;Y12+=0.293;r12-=0.293;
         o12->update(app,r12,X12,Y12);
     }
     else if(((clock1.getElapsedTime().asMilliseconds()>8102))&&o12!=nullptr) {delete o12; o12=nullptr; hpdrainmiss(HP);}
@@ -1155,7 +3249,7 @@ bool Gameplay(RenderWindow & app, Music* music)
     {
         o13->t=clock1.getElapsedTime().asMilliseconds();
         o13->draw(app);
-        X13+=0.325;Y13+=0.325;r13-=0.325;
+        X13+=0.293;Y13+=0.293;r13-=0.293;
         o13->update(app,r13,X13,Y13);
     }
     else if(((clock1.getElapsedTime().asMilliseconds()>8947))&&o13!=nullptr) {delete o13; o13=nullptr; hpdrainmiss(HP);}
@@ -1163,7 +3257,7 @@ bool Gameplay(RenderWindow & app, Music* music)
     {
         o14->t=clock1.getElapsedTime().asMilliseconds();
         o14->draw(app);
-        X14+=0.325;Y14+=0.325;r14-=0.325;
+        X14+=0.293;Y14+=0.293;r14-=0.293;
         o14->update(app,r14,X14,Y14);
     }
     else if(((clock1.getElapsedTime().asMilliseconds()>9792))&&o14!=nullptr) {delete o14; o14=nullptr; hpdrainmiss(HP);}
@@ -1171,7 +3265,7 @@ bool Gameplay(RenderWindow & app, Music* music)
     {
         o15->t=clock1.getElapsedTime().asMilliseconds();
         o15->draw(app);
-        X15+=0.325;Y15+=0.325;r15-=0.325;
+        X15+=0.293;Y15+=0.293;r15-=0.293;
         o15->update(app,r15,X15,Y15);
     }
     else if(((clock1.getElapsedTime().asMilliseconds()>10637))&&o15!=nullptr) {delete o15; o15=nullptr; hpdrainmiss(HP);}
@@ -1179,7 +3273,7 @@ bool Gameplay(RenderWindow & app, Music* music)
     {
         o16->t=clock1.getElapsedTime().asMilliseconds();
         o16->draw(app);
-        X16+=0.325;Y16+=0.325;r16-=0.325;
+        X16+=0.293;Y16+=0.293;r16-=0.293;
         o16->update(app,r16,X16,Y16);
     }
     else if(((clock1.getElapsedTime().asMilliseconds()>11482))&&o4!=nullptr) {delete o16; o16=nullptr; hpdrainmiss(HP);}
@@ -1187,7 +3281,7 @@ bool Gameplay(RenderWindow & app, Music* music)
     {
         o17->t=clock1.getElapsedTime().asMilliseconds();
         o17->draw(app);
-        X17+=0.325;Y17+=0.325;r17-=0.325;
+        X17+=0.293;Y17+=0.293;r17-=0.293;
         o17->update(app,r17,X17,Y17);
     }
     else if(((clock1.getElapsedTime().asMilliseconds()>12328))&&o17!=nullptr) {delete o17; o17=nullptr; hpdrainmiss(HP);}
@@ -1195,7 +3289,7 @@ bool Gameplay(RenderWindow & app, Music* music)
     {
         o18->t=clock1.getElapsedTime().asMilliseconds();
         o18->draw(app);
-        X18+=0.325;Y18+=0.325;r18-=0.325;
+        X18+=0.293;Y18+=0.293;r18-=0.293;
         o18->update(app,r18,X18,Y18);
     }
     else if(((clock1.getElapsedTime().asMilliseconds()>13173))&&o18!=nullptr) {delete o18; o18=nullptr; hpdrainmiss(HP);}
@@ -1203,7 +3297,7 @@ bool Gameplay(RenderWindow & app, Music* music)
     {
         o19->t=clock1.getElapsedTime().asMilliseconds();
         o19->draw(app);
-        X19+=0.325;Y19+=0.325;r19-=0.325;
+        X19+=0.293;Y19+=0.293;r19-=0.293;
         o19->update(app,r19,X19,Y19);
     }
     else if(((clock1.getElapsedTime().asMilliseconds()>14440))&&o19!=nullptr) {delete o19; o19=nullptr; hpdrainmiss(HP);}
@@ -1211,7 +3305,7 @@ bool Gameplay(RenderWindow & app, Music* music)
     {
         o20->t=clock1.getElapsedTime().asMilliseconds();
         o20->draw(app);
-        X20+=0.325;Y20+=0.325;r20-=0.325;
+        X20+=0.293;Y20+=0.293;r20-=0.293;
         o20->update(app,r20,X20,Y20);
     }
     else if(((clock1.getElapsedTime().asMilliseconds()>14863))&&o20!=nullptr) {delete o20; o20=nullptr; hpdrainmiss(HP);}
@@ -1219,7 +3313,7 @@ bool Gameplay(RenderWindow & app, Music* music)
     {
         o21->t=clock1.getElapsedTime().asMilliseconds();
         o21->draw(app);
-        X21+=0.325;Y21+=0.325;r21-=0.325;
+        X21+=0.293;Y21+=0.293;r21-=0.293;
         o21->update(app,r21,X21,Y21);
     }
     else if(((clock1.getElapsedTime().asMilliseconds()>15708))&&o21!=nullptr) {delete o21; o21=nullptr; hpdrainmiss(HP);}
@@ -1227,7 +3321,7 @@ bool Gameplay(RenderWindow & app, Music* music)
     {
         o22->t=clock1.getElapsedTime().asMilliseconds();
         o22->draw(app);
-        X22+=0.325;Y22+=0.325;r22-=0.325;
+        X22+=0.293;Y22+=0.293;r22-=0.293;
         o22->update(app,r22,X22,Y22);
     }
     else if(((clock1.getElapsedTime().asMilliseconds()>16553))&&o22!=nullptr) {delete o22; o22=nullptr; hpdrainmiss(HP);}
@@ -1235,7 +3329,7 @@ bool Gameplay(RenderWindow & app, Music* music)
     {
         o23->t=clock1.getElapsedTime().asMilliseconds();
         o23->draw(app);
-        X23+=0.325;Y23+=0.325;r23-=0.325;
+        X23+=0.293;Y23+=0.293;r23-=0.293;
         o23->update(app,r23,X23,Y23);
     }
     else if(((clock1.getElapsedTime().asMilliseconds()>17821))&&o23!=nullptr) {delete o23; o23=nullptr; hpdrainmiss(HP);}
@@ -1243,7 +3337,7 @@ bool Gameplay(RenderWindow & app, Music* music)
     {
         o24->t=clock1.getElapsedTime().asMilliseconds();
         o24->draw(app);
-        X24+=0.325;Y24+=0.325;r24-=0.325;
+        X24+=0.293;Y24+=0.293;r24-=0.293;
         o24->update(app,r24,X24,Y24);
     }
     else if(((clock1.getElapsedTime().asMilliseconds()>18243))&&o24!=nullptr) {delete o24; o24=nullptr; hpdrainmiss(HP);}
@@ -1251,7 +3345,7 @@ bool Gameplay(RenderWindow & app, Music* music)
     {
         o25->t=clock1.getElapsedTime().asMilliseconds();
         o25->draw(app);
-        X25+=0.325;Y25+=0.325;r25-=0.325;
+        X25+=0.293;Y25+=0.293;r25-=0.293;
         o25->update(app,r25,X25,Y25);
     }
     else if(((clock1.getElapsedTime().asMilliseconds()>19088))&&o25!=nullptr) {delete o25; o25=nullptr; hpdrainmiss(HP);}
@@ -1259,7 +3353,7 @@ bool Gameplay(RenderWindow & app, Music* music)
     {
         o26->t=clock1.getElapsedTime().asMilliseconds();
         o26->draw(app);
-        X26+=0.325;Y26+=0.325;r26-=0.325;
+        X26+=0.293;Y26+=0.293;r26-=0.293;
         o26->update(app,r26,X26,Y26);
     }
     else if(((clock1.getElapsedTime().asMilliseconds()>19933))&&o26!=nullptr) {delete o26; o26=nullptr; hpdrainmiss(HP);}
@@ -1267,7 +3361,7 @@ bool Gameplay(RenderWindow & app, Music* music)
     {
         o27->t=clock1.getElapsedTime().asMilliseconds();
         o27->draw(app);
-        X27+=0.325;Y27+=0.325;r27-=0.325;
+        X27+=0.293;Y27+=0.293;r27-=0.293;
         o27->update(app,r27,X27,Y27);
     }
     else if(((clock1.getElapsedTime().asMilliseconds()>21201))&&o27!=nullptr) {delete o27; o27=nullptr; hpdrainmiss(HP);}
@@ -1275,7 +3369,7 @@ bool Gameplay(RenderWindow & app, Music* music)
     {
         o28->t=clock1.getElapsedTime().asMilliseconds();
         o28->draw(app);
-        X28+=0.325;Y28+=0.325;r28-=0.325;
+        X28+=0.293;Y28+=0.293;r28-=0.293;
         o28->update(app,r28,X28,Y28);
     }
     else if(((clock1.getElapsedTime().asMilliseconds()>21623))&&o28!=nullptr) {delete o28; o28=nullptr; hpdrainmiss(HP);}
@@ -1283,7 +3377,7 @@ bool Gameplay(RenderWindow & app, Music* music)
     {
         o29->t=clock1.getElapsedTime().asMilliseconds();
         o29->draw(app);
-        X29+=0.325;Y29+=0.325;r29-=0.325;
+        X29+=0.293;Y29+=0.293;r29-=0.293;
         o29->update(app,r29,X29,Y29);
     }
     else if(((clock1.getElapsedTime().asMilliseconds()>22468))&&o29!=nullptr) {delete o29; o29=nullptr; hpdrainmiss(HP);}
@@ -1291,7 +3385,7 @@ bool Gameplay(RenderWindow & app, Music* music)
     {
         o30->t=clock1.getElapsedTime().asMilliseconds();
         o30->draw(app);
-        X30+=0.325;Y30+=0.325;r30-=0.325;
+        X30+=0.293;Y30+=0.293;r30-=0.293;
         o30->update(app,r30,X30,Y30);
     }
     else if(((clock1.getElapsedTime().asMilliseconds()>23102))&&o30!=nullptr) {delete o30; o30=nullptr; hpdrainmiss(HP);}
@@ -1299,7 +3393,7 @@ bool Gameplay(RenderWindow & app, Music* music)
     {
         o31->t=clock1.getElapsedTime().asMilliseconds();
         o31->draw(app);
-        X31+=0.325;Y31+=0.325;r31-=0.325;
+        X31+=0.293;Y31+=0.293;r31-=0.293;
         o31->update(app,r31,X31,Y31);
     }
     else if(((clock1.getElapsedTime().asMilliseconds()>24159))&&o31!=nullptr) {delete o31; o31=nullptr; hpdrainmiss(HP);}
@@ -1307,7 +3401,7 @@ bool Gameplay(RenderWindow & app, Music* music)
     {
         o32->t=clock1.getElapsedTime().asMilliseconds();
         o32->draw(app);
-        X32+=0.325;Y32+=0.325;r32-=0.325;
+        X32+=0.293;Y32+=0.293;r32-=0.293;
         o32->update(app,r32,X32,Y32);
     }
     else if(((clock1.getElapsedTime().asMilliseconds()>24792))&&o32!=nullptr) {delete o32; o32=nullptr; hpdrainmiss(HP);}
@@ -1315,7 +3409,7 @@ bool Gameplay(RenderWindow & app, Music* music)
     {
         o33->t=clock1.getElapsedTime().asMilliseconds();
         o33->draw(app);
-        X33+=0.325;Y33+=0.325;r33-=0.325;
+        X33+=0.293;Y33+=0.293;r33-=0.293;
         o33->update(app,r33,X33,Y33);
     }
     else if(((clock1.getElapsedTime().asMilliseconds()>25849))&&o33!=nullptr) {delete o33; o33=nullptr; hpdrainmiss(HP);}
@@ -1323,7 +3417,7 @@ bool Gameplay(RenderWindow & app, Music* music)
     {
         o34->t=clock1.getElapsedTime().asMilliseconds();
         o34->draw(app);
-        X34+=0.325;Y34+=0.325;r34-=0.325;
+        X34+=0.293;Y34+=0.293;r34-=0.293;
         o34->update(app,r34,X34,Y34);
     }
     else if(((clock1.getElapsedTime().asMilliseconds()>26482))&&o34!=nullptr) {delete o34; o34=nullptr; hpdrainmiss(HP);}
@@ -1331,7 +3425,7 @@ bool Gameplay(RenderWindow & app, Music* music)
     {
         o35->t=clock1.getElapsedTime().asMilliseconds();
         o35->draw(app);
-        X35+=0.325;Y35+=0.325;r35-=0.325;
+        X35+=0.293;Y35+=0.293;r35-=0.293;
         o35->update(app,r35,X35,Y35);
     }
     else if(((clock1.getElapsedTime().asMilliseconds()>27539))&&o35!=nullptr) {delete o35; o35=nullptr; hpdrainmiss(HP);}
@@ -1339,7 +3433,7 @@ bool Gameplay(RenderWindow & app, Music* music)
     {
         o36->t=clock1.getElapsedTime().asMilliseconds();
         o36->draw(app);
-        X36+=0.325;Y36+=0.325;r36-=0.325;
+        X36+=0.293;Y36+=0.293;r36-=0.293;
         o36->update(app,r36,X36,Y36);
     }
     else if(((clock1.getElapsedTime().asMilliseconds()>28384))&&o36!=nullptr) {delete o36; o36=nullptr; hpdrainmiss(HP);}
@@ -1347,7 +3441,7 @@ bool Gameplay(RenderWindow & app, Music* music)
     {
         o37->t=clock1.getElapsedTime().asMilliseconds();
         o37->draw(app);
-        X37+=0.325;Y37+=0.325;r37-=0.325;
+        X37+=0.293;Y37+=0.293;r37-=0.293;
         o37->update(app,r37,X37,Y37);
     }
             std::ostringstream playerScoreString;
